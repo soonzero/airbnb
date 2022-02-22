@@ -1,0 +1,221 @@
+/* header & nav */
+
+.header {
+  width: 100vw;
+  background-color: black;
+  transition: all 150ms ease-in-out;
+}
+
+.header.fixed {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+.header::after {
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+  content: "";
+  display: block;
+  height: 80px;
+  width: 100%;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+}
+
+.navContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  color: white;
+  background-color: black;
+  max-width: 1600px;
+  padding: 0 80px;
+  margin: 0 auto;
+  transition: all 150ms ease-in-out;
+}
+
+.navContent.fixed {
+  background-color: white;
+}
+
+.navLogo.fixed > img {
+  color: #ff385c;
+}
+
+.navLogo {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.navMenu.fixed {
+  display: none;
+}
+
+.navMenu ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.navMenu li,
+.navMenu div {
+  padding: 10px 16px;
+  cursor: pointer;
+  position: relative;
+}
+
+.navMenu li::before {
+  content: "";
+  height: 2px;
+  background-color: white;
+  border-radius: 1px;
+  position: absolute;
+  bottom: -2px;
+  right: 50%;
+  width: 18px;
+  margin-right: -9px;
+}
+
+.navMenu form {
+  position: absolute;
+}
+
+.navSide {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-basis: 0;
+  justify-content: flex-end;
+}
+
+.navSide.fixed {
+  color: #222222;
+}
+
+.navHostGlobal {
+  margin-right: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+}
+
+.navHost,
+.navGlobal {
+  border-radius: 22px;
+}
+
+.fixed .navHost:hover,
+.fixed .navGlobal:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.navHost:hover,
+.navGlobal:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navHost > p,
+.navGlobal > svg {
+  padding: 12px;
+  cursor: pointer;
+}
+
+.menuAccount {
+  width: 77px;
+  height: 42px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #dddddd;
+  border-radius: 21px;
+  padding: 5px 5px 5px 12px;
+  box-sizing: border-box;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+}
+
+.startHosting,
+.settings {
+  padding: 12px;
+  font-size: 14px;
+}
+
+.settings {
+  margin-right: 8px;
+}
+
+.account {
+  margin-left: 12px;
+  height: 30px;
+  color: #717171;
+  position: relative;
+}
+
+.accountUpdate {
+  width: 10px;
+  height: 10px;
+  background-color: rgb(255, 56, 92);
+  border-radius: 50%;
+  border: 1.5px solid white;
+  position: absolute;
+  top: -4.5px;
+  right: -2.5px;
+}
+
+.profileMenu {
+  position: absolute;
+  top: 18.25px;
+  right: -1px;
+  margin-top: 34px;
+  padding: 8px 0;
+  color: black;
+  background-color: white;
+  border-radius: 12px;
+  box-sizing: border-box;
+  height: 243px;
+  min-width: 240px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 16px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuList {
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 18px;
+  overflow: hidden;
+}
+
+.menuList:hover {
+  background-color: #dddddd;
+}
+
+.menuDivider {
+  display: inline-block;
+  width: 100%;
+  margin: 8px 0 5.5px;
+  height: 1px;
+  background-color: #dddddd;
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
+}

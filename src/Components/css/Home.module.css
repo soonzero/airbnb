@@ -1,0 +1,139 @@
+/* main search */
+
+.mainSearch {
+  background-color: black;
+  padding: 96px 80px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.flexibleSearch {
+  background-image: url("https://a0.muscache.com/im/pictures/f1502649-e034-40ab-9fed-7992b7d550c6.jpg?im_q=highq&im_w=2560");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 1920px;
+  height: 960px;
+  border-radius: 12px;
+  padding: 0 80px 72px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flexibleSearch > h1 {
+  color: white;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 500;
+  line-height: 1.125;
+}
+
+.flexibleSearch > a {
+  padding: 20px 35px;
+  background-color: white;
+  font-weight: 700;
+  border-radius: 30px;
+  text-decoration: none;
+}
+
+.flexibleSearch > a:hover {
+  background-color: #ebebeb;
+}
+
+.flexibleSearch > a > span {
+  color: purple;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* main content */
+
+.mainContent {
+  padding-top: 96px;
+  margin: 0 auto;
+  max-width: 1920px;
+}
+
+.mainContentTitle {
+  font-size: 42px;
+  margin-bottom: 48px;
+  font-weight: 600;
+}
+
+.mainContentCards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 24px;
+  overflow: hidden;
+}
+
+.mainExperiences {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  overflow: hidden;
+}
+
+.mainExperience {
+  height: 1083px;
+  padding: 80px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  color: white;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.mainExperienceTraveling {
+  background-image: url("https://a0.muscache.com/im/pictures/c2adcb16-6c3f-4041-86a1-afa9c303c500.jpg?im_w=1920");
+}
+
+.mainExperienceAtHome {
+  background-image: url("https://a0.muscache.com/im/pictures/c1bdf53f-2a19-4529-aa9b-1b0e6bd8d0ee.jpg?im_w=1920");
+}
+
+.experience {
+  font-size: 53px;
+  margin-bottom: 24px;
+}
+
+.experienceButton {
+  background-color: white;
+  display: inline-block;
+  padding: 14px 24px;
+  border: 1px solid black;
+  border-radius: 12px;
+  box-sizing: border-box;
+  font-weight: 600;
+  color: #222222;
+}
+
+.experienceButton:hover {
+  background-color: #ebebeb;
+}
+
+.askSuperHost {
+  height: 960px;
+  box-sizing: border-box;
+  padding: 80px;
+  margin-top: 96px;
+  border-radius: 12px;
+  background-image: url("https://a0.muscache.com/im/pictures/0528b0f7-4c0c-47bc-9786-d91454f531ba.jpg?im_w=2560");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.askHosting {
+  font-size: 95px;
+  line-height: 1.1052631579;
+  height: 752px;
+  color: white;
+  font-weight: 600;
+}

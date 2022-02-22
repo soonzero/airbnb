@@ -1,0 +1,202 @@
+/* main */
+
+.main {
+  padding-top: 112px;
+}
+
+.mainContent {
+  margin: 0px auto 100px;
+  max-width: 1600px;
+  box-sizing: border-box;
+}
+
+/* cards */
+
+.cardsTitle {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  margin-bottom: 16px;
+  justify-content: space-between;
+}
+
+.cardsTitle h2 {
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.scrollBtns {
+  display: flex;
+  flex-direction: row;
+}
+
+.scrollBtn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+}
+
+.scrollBtn:hover {
+  transform: scale(1.04);
+}
+
+.scrollBtn:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  color: rgb(221, 221, 221) !important;
+  transform: scale(1) !important;
+}
+
+.scrollBtn:first-child {
+  margin-right: 8px;
+}
+
+.cardsDesc {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.cardsCounter {
+  margin-right: 17px;
+}
+
+.cardContents {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin-right: 16px;
+  position: relative;
+  cursor: pointer;
+}
+
+.cardCover {
+  width: 253.328px;
+  height: 337.766px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  position: relative;
+  z-index: -1;
+}
+
+.cardCover video {
+  z-index: 0;
+  width: 253.328px;
+  height: 337.766px;
+  position: absolute;
+  border-radius: 14px;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.cardWish {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.cardDetail {
+  margin-bottom: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  height: 18px;
+}
+
+.cardStar {
+  margin-right: 4px;
+  display: flex;
+}
+
+.cardScore {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.cardReviewcount {
+  font-size: 14px;
+  color: #717171;
+}
+
+.cardDot {
+  margin: 0 4px;
+  color: #717171;
+}
+
+.cardCountry {
+  color: #717171;
+}
+
+.cardTitle {
+  margin-bottom: 6px;
+  font-size: 16px;
+  font-weight: 300;
+  min-height: 20px;
+  display: flex;
+  color: #222222;
+  align-items: flex-start;
+  line-height: 20px;
+}
+
+.cardPrice {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.cardPrice > span {
+  font-weight: normal;
+}
+
+.cardOriginalPrice {
+  font-size: 16px;
+  text-decoration: line-through;
+  font-weight: 800;
+  color: #717171;
+  margin-right: 4px;
+}
+
+.seeMore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.seeMoreBtn {
+  padding: 14px 24px;
+  background-color: #222222;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}

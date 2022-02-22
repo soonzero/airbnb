@@ -1,0 +1,168 @@
+/* header */
+
+.header {
+  height: 34px;
+  padding: 24px;
+  margin-bottom: 48px;
+  display: flex;
+}
+
+.main {
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 48px auto;
+  line-height: 1.43;
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 66.66%;
+  margin: 48px;
+}
+
+.title {
+  font-size: 48px;
+  margin-bottom: 24px;
+}
+
+.detail {
+  font-size: 26px;
+  text-align: center;
+}
+
+.safetyCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin: 48px auto;
+  column-gap: 48px;
+  row-gap: 96px;
+}
+
+.safetyCards > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.safetyCard {
+  cursor: pointer;
+}
+
+.cardCover {
+  width: 616px;
+  height: 346.5px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cardTitle {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.cardDesc {
+  font-size: 16px;
+  color: #717171;
+  margin-bottom: 4px;
+  font-weight: 300;
+}
+
+.cardMoreInfo {
+  font-size: 16px;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.policies {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 32px;
+  box-sizing: border-box;
+  margin: 48px auto 80px;
+}
+
+.policy img {
+  width: 96px;
+  margin-bottom: 32px;
+}
+
+.policyTitle {
+  margin-bottom: 8px;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.policyDesc {
+  font-size: 18px;
+}
+
+.buttonMore {
+  padding: 13px 23px;
+  border: 1px solid black;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 48px;
+  cursor: pointer;
+}
+
+.buttonMore:hover {
+  background-color: #ebebeb;
+}
+
+.image img {
+  width: 1280px;
+  height: 600px;
+  border-radius: 12px;
+  margin: 96px auto;
+}
+
+.questions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 48px;
+  max-width: 1280px;
+  line-height: 1.43;
+  margin: 48px auto 144px;
+}
+
+.questions div {
+  display: inline-block;
+  padding: 32px 0;
+  border-bottom: 1px solid gray;
+}
+
+.question {
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.etc {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 32px;
+  width: 1280px;
+  margin: 48px auto;
+}
+
+.etc h3 {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 45px;
+}
+
+.etc span {
+  font-size: 18px;
+  text-decoration: underline;
+}
