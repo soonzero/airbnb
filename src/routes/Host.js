@@ -1,5 +1,6 @@
 import React from "react";
 import Footer from "../Components/Footer";
+import Dropdown from "../Components/Dropdown";
 import style from "../Components/css/Host.module.css";
 import { ReactComponent as Logo } from "../img/hostlogo.svg";
 import { ReactComponent as Left } from "../img/host_leftbutton.svg";
@@ -10,6 +11,7 @@ import { Link } from "react-router-dom";
 export default function Host() {
   const [fixed, setFixed] = React.useState(false);
   const [fix, setFix] = React.useState(false);
+  const [carouselX, setCarouselX] = React.useState(0);
   const [scrollY, setScrollY] = React.useState(0);
   const [carousel, setCarousel] = React.useState([
     {
@@ -67,18 +69,38 @@ export default function Host() {
       location: "파라치",
     },
   ]);
+  const [transparency, setTransparency] = React.useState([1, 0, 0, 0, 0, 0]);
+
+  const selection = {
+    space: {
+      question: "어떤 종류의 숙소인가요?",
+      content: [
+        {
+          id: "공간 전체",
+        },
+        {
+          id: "개인실",
+        },
+        {
+          id: "다인실",
+        },
+      ],
+    },
+    guests: {
+      question: "숙박 인원은 몇 명인가요?",
+      content: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    },
+  };
+
   const [prevDisabled, setPrevDisabled] = React.useState(true);
   const [nextDisabled, setNextDisabled] = React.useState(false);
 
-  const [dropSpace, setDropSpace] = React.useState(false);
-  const spaceRef = React.useRef(null);
-
   function handleScroll() {
-    if (scrollY > 1200 && scrollY < 5110.5) {
+    if (scrollY > 1200 && scrollY < 5105) {
       setScrollY(window.scrollY);
       setFixed(true);
-      console.log(scrollY);
-    } else if (scrollY >= 5110.5) {
+      setFix(false);
+    } else if (scrollY >= 5105) {
       setScrollY(window.scrollY);
       setFixed(false);
       setFix(true);
@@ -92,11 +114,14 @@ export default function Host() {
   function carouselScroll() {
     const container = document.querySelector(`.${style.carouselContainer}`);
     if (container.scrollLeft > 0 && container.scrollLeft < 2781.5) {
+      setCarouselX(container.scrollLeft);
       setPrevDisabled(false);
       setNextDisabled(false);
     } else if (container.scrollLeft == 2781.5) {
+      setCarouselX(container.scrollLeft);
       setNextDisabled(true);
     } else {
+      setCarouselX(container.scrollLeft);
       setPrevDisabled(true);
     }
   }
@@ -124,7 +149,7 @@ export default function Host() {
     return () => {
       container.removeEventListener("scroll", carouselScroll);
     };
-  });
+  }, [carouselX]);
 
   React.useEffect(() => {
     function scrollListener() {
@@ -134,28 +159,57 @@ export default function Host() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
-
-  function dropMenu() {
-    setDropSpace(!dropSpace);
-  }
+  }, [scrollY]);
 
   React.useEffect(() => {
-    const pageClickEvent = (event) => {
-      if (
-        spaceRef.current !== null &&
-        !spaceRef.current.contains(event.target)
-      ) {
-        setDropSpace(!dropSpace);
-      }
-    };
-    if (dropSpace) {
-      window.addEventListener("click", pageClickEvent);
+    const container = document.querySelector(`.${style.carouselContainer}`);
+    if (container.scrollLeft >= 0 && container.scrollLeft < 548) {
+      setTransparency([
+        (548 - container.scrollLeft) / 548,
+        container.scrollLeft / 548,
+        0,
+        0,
+        0,
+        0,
+      ]);
+    } else if (container.scrollLeft >= 548 && container.scrollLeft < 1110) {
+      setTransparency([
+        0,
+        (1110 - container.scrollLeft) / (1110 - 548),
+        (container.scrollLeft - 548) / (1110 - 548),
+        0,
+        0,
+        0,
+      ]);
+    } else if (container.scrollLeft >= 1110 && container.scrollLeft < 1671.5) {
+      setTransparency([
+        0,
+        0,
+        (1671.5 - container.scrollLeft) / (1671.5 - 1110),
+        (container.scrollLeft - 1110) / (1671.5 - 1110),
+        0,
+        0,
+      ]);
+    } else if (container.scrollLeft >= 1671.5 && container.scrollLeft < 2233) {
+      setTransparency([
+        0,
+        0,
+        0,
+        (2233 - container.scrollLeft) / (2233 - 1671.5),
+        (container.scrollLeft - 1671.5) / (2233 - 1671.5),
+        0,
+      ]);
+    } else if (container.scrollLeft >= 2233 && container.scrollLeft < 2781.5) {
+      setTransparency([
+        0,
+        0,
+        0,
+        0,
+        (2781.5 - container.scrollLeft) / (2781.5 - 2233),
+        (container.scrollLeft - 2233) / (2781.5 - 2233),
+      ]);
     }
-    return () => {
-      window.removeEventListener("click", pageClickEvent);
-    };
-  }, [dropSpace]);
+  }, [carouselX]);
 
   const carouselItems = carousel.map((item) => {
     return (
@@ -164,7 +218,10 @@ export default function Host() {
           className={style.cCover}
           style={{ backgroundImage: `url(${item.cover})` }}
         ></div>
-        <div className={style.cDesc}>
+        <div
+          className={style.cDesc}
+          style={{ opacity: transparency[item.id - 1] }}
+        >
           <div className={style.desc}>{item.desc}</div>
           <div className={style.signature}>
             <img src={item.signature} />
@@ -176,28 +233,9 @@ export default function Host() {
   });
 
   return (
-    <div>
+    <div className={style.whole}>
       {fixed ? (
         <header className={style.header}>
-          <Link to="/">
-            <div className={style.logo}>
-              <Logo fill="black" />
-            </div>
-          </Link>
-          <div className={style.aboutHost}>
-            <div className={style.askSuperHost}>
-              <div className={style.superHostsImage}>
-                <img src="https://a0.muscache.com/im/pictures/c131fb36-f46a-464f-ad2f-087ebf88078d.jpg"></img>
-                <img src="https://a0.muscache.com/im/pictures/3ddc6e92-e2fd-4cdc-a460-2f1d7d5365ae.jpg"></img>
-                <img src="https://a0.muscache.com/im/pictures/ba6627db-1aa4-4f7f-9f18-5be3d3470037.jpg"></img>
-              </div>
-              슈퍼호스트에게 물어보기
-            </div>
-            <div className={style.startHosting}>호스팅 시작하기</div>
-          </div>
-        </header>
-      ) : fix ? (
-        <header className={`${style.header} ${style.fixagain}`}>
           <Link to="/">
             <div className={style.logo}>
               <Logo fill="black" />
@@ -232,26 +270,28 @@ export default function Host() {
               호스팅
             </h1>
             <button className={style.startHosting}>호스팅 시작하기</button>
-            <div className={style.scrollDown} onClick={scrollDown}>
-              <svg
-                viewBox="0 0 32 32"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{
-                  fill: "none",
-                  height: "16px",
-                  width: "16px",
-                  stroke: "white",
-                  strokeWidth: "4",
-                  overflow: "visible",
-                }}
-                aria-hidden="true"
-                role="presentation"
-                focusable="false"
-              >
-                <g fill="none">
-                  <path d="m28 12-11.2928932 11.2928932c-.3905243.3905243-1.0236893.3905243-1.4142136 0l-11.2928932-11.2928932"></path>
-                </g>
-              </svg>
+            <div className={style.scrollDown}>
+              <span onClick={scrollDown}>
+                <svg
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{
+                    fill: "none",
+                    height: "16px",
+                    width: "16px",
+                    stroke: "white",
+                    strokeWidth: "4",
+                    overflow: "visible",
+                  }}
+                  aria-hidden="true"
+                  role="presentation"
+                  focusable="false"
+                >
+                  <g fill="none">
+                    <path d="m28 12-11.2928932 11.2928932c-.3905243.3905243-1.0236893.3905243-1.4142136 0l-11.2928932-11.2928932"></path>
+                  </g>
+                </svg>
+              </span>
             </div>
           </div>
         </div>
@@ -300,98 +340,7 @@ export default function Host() {
       </main>
       <main className={style.main}>
         <div className={style.content}>
-          <div className={style.pContainer}>
-            <div className={style.profit}>
-              <div className={style.profitContent}>
-                <h1 className={style.question}>어떤 종류의 숙소인가요?</h1>
-                <div className={style.answer}>
-                  <button className={style.answerButton} onClick={dropMenu}>
-                    <span>공간 전체</span>
-                    <svg
-                      width="14"
-                      height="8"
-                      viewBox="0 0 14 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M13 1.00008L7.35355 6.64652C7.15829 6.84178 6.84171 6.84178 6.64645 6.64652L1 1.00008"
-                        stroke="#222"
-                        strokeWidth="2"
-                      ></path>
-                    </svg>
-                    {dropSpace ? (
-                      <div ref={spaceRef} className={style.selection}>
-                        <ul className={style.listbox}>
-                          <li className={style.list}>공간 전체</li>
-                          <li className={style.list}>개인실</li>
-                          <li className={style.list}>다인실</li>
-                        </ul>
-                      </div>
-                    ) : null}
-                  </button>
-                </div>
-              </div>
-              <div className={style.profitContent}>
-                <h1 className={style.question}>숙박 인원은 몇 명인가요?</h1>
-                <div className={style.answer}>
-                  <button className={style.answerButton}>
-                    <span>게스트 4명</span>
-                    <svg
-                      width="14"
-                      height="8"
-                      viewBox="0 0 14 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M13 1.00008L7.35355 6.64652C7.15829 6.84178 6.84171 6.84178 6.64645 6.64652L1 1.00008"
-                        stroke="#222"
-                        strokeWidth="2"
-                      ></path>
-                    </svg>
-                    {/* <div className={style.selection}>
-                      <ul className={style.listbox}>
-                        <li className={style.list}>게스트 1명</li>
-                        <li className={style.list}>게스트 2명</li>
-                        <li className={style.list}>게스트 3명</li>
-                        <li className={style.list}>게스트 4명</li>
-                      </ul>
-                    </div> */}
-                  </button>
-                </div>
-              </div>
-              <div className={style.profitContent}>
-                <h1 className={style.question}>숙소 위치는 어디인가요?</h1>
-                <div className={style.answer}>
-                  <button className={style.answerButton}>
-                    <span>서울시</span>
-                    <svg
-                      width="14"
-                      height="8"
-                      viewBox="0 0 14 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M13 1.00008L7.35355 6.64652C7.15829 6.84178 6.84171 6.84178 6.64645 6.64652L1 1.00008"
-                        stroke="#222"
-                        strokeWidth="2"
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div className={style.profitContent}>
-                <h1 className={style.result}>
-                  월 최대 ₩1,773,972의 수입을 올리세요.*
-                </h1>
-              </div>
-            </div>
-            <div className={style.calc}>
-              <button>에어비앤비가 예상 수입을 산정하는 방법</button>
-            </div>
-          </div>
+          <Dropdown space={selection.space} guests={selection.guests} />
         </div>
       </main>
       <main className={style.main}>
@@ -433,6 +382,26 @@ export default function Host() {
         </div>
       </main>
       <section className={style.fullScreen}>
+        {fix ? (
+          <header className={`${style.fixagain}`}>
+            <Link to="/">
+              <div className={style.logo}>
+                <Logo fill="black" />
+              </div>
+            </Link>
+            <div className={style.aboutHost}>
+              <div className={style.askSuperHost}>
+                <div className={style.superHostsImage}>
+                  <img src="https://a0.muscache.com/im/pictures/c131fb36-f46a-464f-ad2f-087ebf88078d.jpg"></img>
+                  <img src="https://a0.muscache.com/im/pictures/3ddc6e92-e2fd-4cdc-a460-2f1d7d5365ae.jpg"></img>
+                  <img src="https://a0.muscache.com/im/pictures/ba6627db-1aa4-4f7f-9f18-5be3d3470037.jpg"></img>
+                </div>
+                슈퍼호스트에게 물어보기
+              </div>
+              <div className={style.startHosting}>호스팅 시작하기</div>
+            </div>
+          </header>
+        ) : null}
         <div className={style.leftScreen}>
           <video
             src="https://a0.muscache.com/v/9a/7a/9a7ad4a1-cfab-5f7d-96e6-fda8abceabe7/9a7ad4a1cfab5f7d96e6fda8abceabe7_4000k_1.mp4"
