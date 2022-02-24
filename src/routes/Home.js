@@ -61,9 +61,9 @@ function Home() {
             <br />
             여행지를 찾아드릴게요!
           </h1>
-          <a href="https://www.airbnb.co.kr/s/homes?search_mode=flex_destinations_search&date_picker_type=flexible_dates">
+          <Link to="/flex">
             <span>유연한 검색</span>
-          </a>
+          </Link>
         </div>
       </section>
       <main className={style.mainContent}>

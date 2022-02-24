@@ -3,6 +3,7 @@ import Home from "./routes/Home";
 import Covid from "./routes/Covid";
 import Online from "./routes/Online";
 import Host from "./routes/Host";
+import Flex from "./routes/Flex";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./reset.css";
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/covid" element={<Covid />} />
         <Route path="/online" element={<Online />} />
         <Route path="/host" element={<Host />} />
+        <Route path="/flex" element={<Flex />} />
       </Routes>
     </Router>
   );

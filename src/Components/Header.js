@@ -13,11 +13,6 @@ export default function Header(props) {
   const [menu, setMenu] = React.useState(false);
 
   function handleScroll() {
-    if (props.fixed == "true") {
-      setFixed(true);
-      return;
-    }
-
     if (scrollY > 50) {
       setScrollY(window.scrollY);
       setFixed(true);
@@ -28,6 +23,10 @@ export default function Header(props) {
   }
 
   React.useEffect(() => {
+    if (props.fixed == "true") {
+      setFixed(true);
+      return;
+    }
     function scrollListener() {
       window.addEventListener("scroll", handleScroll);
     }
@@ -35,7 +34,7 @@ export default function Header(props) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, [scrollY]);
 
   function handleMenu(event) {
     setMenu(!menu);
