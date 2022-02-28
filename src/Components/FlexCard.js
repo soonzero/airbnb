@@ -1,5 +1,7 @@
 import React from "react";
 import { ReactComponent as Wish } from "../img/wish.svg";
+import { ReactComponent as Prev } from "../img/flexcard_prev.svg";
+import { ReactComponent as Next } from "../img/flexcard_next.svg";
 import style from "../Components/css/FlexCard.module.css";
 
 export default function FlexCard(props) {
@@ -15,6 +17,14 @@ export default function FlexCard(props) {
             >
               <div className={style.wish}>
                 <Wish />
+              </div>
+              <div className={style.btns}>
+                <div className={style.prev}>
+                  <Prev />
+                </div>
+                <div className={style.next}>
+                  <Next />
+                </div>
               </div>
             </div>
             <div className={style.detail}>

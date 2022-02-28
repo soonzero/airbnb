@@ -45,6 +45,7 @@ export default function Dropdown(props) {
       window.removeEventListener("click", pageClickEvent);
     };
   }, [dropSpace]);
+
   React.useEffect(() => {
     const pageClickEvent = (event) => {
       if (

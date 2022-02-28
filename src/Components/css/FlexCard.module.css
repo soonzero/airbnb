@@ -21,6 +21,29 @@
   margin-bottom: 10px;
 }
 
+.prev,
+.next {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.prev {
+  left: 9px;
+}
+
+.next {
+  right: 9px;
+}
+
 .wish {
   position: absolute;
   top: 16px;
@@ -42,11 +65,11 @@
   align-items: flex-end;
   justify-content: space-between;
   font-weight: 400;
+  color: #717171;
 }
 
 .distance {
   font-size: 16px;
-
   line-height: 1.375;
 }
 

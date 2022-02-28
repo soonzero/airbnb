@@ -8,6 +8,7 @@ import style from "./css/OnlineCard.module.css";
 export default function OnlineCard(props) {
   const [video, setVideo] = React.useState(false);
   const [target, setTarget] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const cardElements = props.items.contents.map((c) => {
     return (
@@ -17,21 +18,23 @@ export default function OnlineCard(props) {
         className={style.card}
         onMouseEnter={(event) => {
           setTarget(event.target.id);
-          setVideo(true);
+          setIsLoading(false);
+          setTimeout(() => setVideo(true), 500);
         }}
         onMouseLeave={() => {
           setVideo(false);
+          setIsLoading(true);
         }}
       >
         <div
           className={style.cardCover}
           style={
-            video && target == c.id
+            video && target == c.id && !isLoading
               ? null
               : { backgroundImage: `url(${c.image})` }
           }
         >
-          {video && target == c.id ? (
+          {video && target == c.id && !isLoading ? (
             <video src={`${c.video}`} autoPlay muted></video>
           ) : null}
           <button className={style.cardWish}>

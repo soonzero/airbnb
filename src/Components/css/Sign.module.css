@@ -1,0 +1,228 @@
+input,
+select {
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+    "Helvetica Neue", sans-serif;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 64px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.header h3 {
+  font-size: 16px;
+  margin: 0 16px;
+}
+
+.main {
+  padding: 24px;
+}
+
+.welcome {
+  margin: 8px 0 24px;
+  font-size: 22px;
+  line-height: 1.1818181818;
+  font-weight: 500;
+}
+
+.inputs {
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.input {
+  display: flex;
+  position: relative;
+  border: 1px solid #b0b0b0;
+}
+
+.input:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+.input:last-child {
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+.countryInput,
+.phoneNumberInput {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 56px;
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+.inputTitle {
+  padding-right: 24px;
+  position: absolute;
+  top: 18px;
+  left: 12px;
+  right: 12px;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #717171;
+  transform-origin: 0% 0%;
+  transform: translateY(-8px) scale(0.75);
+}
+
+.countrySelection {
+  padding: 26px 36px 10px 12px;
+  height: 56px;
+  width: 100%;
+  border: none;
+  outline: none;
+  appearance: none;
+  font-size: 16px;
+  line-height: 1.25;
+  background-color: transparent;
+}
+
+.arrow {
+  padding-right: 12px;
+  position: absolute;
+  height: 100%;
+  right: 0px;
+  display: flex;
+  align-items: center;
+}
+
+.phoneNumberContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+}
+
+.countryNumber {
+  padding: 26px 0 0 12px;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.phoneNumber {
+  border: none;
+  outline: none;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: transparent;
+  font-size: 16px;
+  line-height: 1.25;
+  padding: 26px 12px 12px 10px;
+}
+
+.phoneNumber::placeholder {
+  color: #717171;
+}
+
+.confirmation {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.confirmation p {
+  font-size: 12px;
+  line-height: 1.3333333333;
+}
+
+.continueBtn {
+  margin-bottom: 24px;
+}
+
+.continueBtn button {
+  width: 100%;
+  text-align: center;
+  color: white;
+  border-radius: 8px;
+  padding: 14px 24px;
+  font-size: 16px;
+  line-height: 1.25;
+  background: linear-gradient(
+    to right,
+    rgb(230, 30, 77) 0%,
+    rgb(227, 28, 95) 50%,
+    rgb(215, 4, 102) 100%
+  );
+  cursor: pointer;
+}
+
+.divider {
+  margin: 16px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.divider span {
+  font-size: 12px;
+  line-height: 1.3333333333;
+  color: #717171;
+  padding: 0 16px;
+  position: relative;
+}
+
+.divider span::before {
+  content: "";
+  position: absolute;
+  border-bottom: 1px solid #e4e4e4;
+  top: 50%;
+  right: 100%;
+  width: 568px;
+}
+
+.divider span::after {
+  content: "";
+  position: absolute;
+  border-bottom: 1px solid #e4e4e4;
+  top: 50%;
+  left: 100%;
+  width: 568px;
+}
+
+.socialLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.socialLogin form {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.socialLogin form:last-child {
+  margin-bottom: 0;
+}
+
+.socialLogin form button {
+  padding: 10px 12px;
+  border: 2px solid #b0b0b0;
+  width: 100%;
+  border-radius: 8px;
+  background-color: white;
+  position: relative;
+  cursor: pointer;
+}
+
+.socialLogin form button:hover {
+  border-color: black;
+}
+
+.icon {
+  position: absolute;
+}
+
+.socialLogin form button div {
+  font-size: 14px;
+  line-height: 1.7142857143;
+}

@@ -42,6 +42,7 @@ function Home() {
   const cardElements = destination.map((e) => {
     return (
       <HomeCard
+        key={e.id}
         location={e.location}
         distance={e.distance}
         cover={e.cover}
@@ -52,8 +53,14 @@ function Home() {
 
   return (
     <div>
-      <Banner />
-      <Header fixed="false" />
+      <div className={style.bannerCovidSafety}>
+        <Link to="/covid">
+          <span>
+            에어비앤비의 코로나19 대응 방안에 대한 최신 정보를 확인하세요.
+          </span>
+        </Link>
+        <Header />
+      </div>
       <section className={style.mainSearch}>
         <div className={style.flexibleSearch}>
           <h1>

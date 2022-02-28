@@ -1,8 +1,28 @@
+/* banner */
+
+.bannerCovidSafety {
+  width: 100vw;
+  height: 50px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.bannerCovidSafety > a {
+  color: white;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.02em;
+}
+
 /* main search */
 
 .mainSearch {
   background-color: black;
-  padding: 96px 80px;
+  padding: 176px 80px 96px;
   display: flex;
   justify-content: center;
   position: relative;

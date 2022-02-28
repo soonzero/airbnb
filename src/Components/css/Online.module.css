@@ -266,3 +266,8 @@
 .filter:last-child {
   margin-right: 0;
 }
+
+.loading {
+  padding: 200px 0;
+  text-align: center;
+}

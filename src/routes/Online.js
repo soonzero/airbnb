@@ -461,6 +461,10 @@ export default function Online() {
     },
   });
 
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  setTimeout(() => setIsLoading(false), 2000);
+
   const experienceElements = experiences.map((e) => {
     return (
       <div className={style.cardItem} style={{ backgroundImage: e.bgimage }}>
@@ -557,7 +561,7 @@ export default function Online() {
 
   return (
     <div>
-      <Header fixed="true" />
+      <Header fixed />
       <main className={style.main}>
         <div className={style.recentlyAddedItems}>
           <div className={style.recentlyAddedHeader}>
@@ -610,10 +614,16 @@ export default function Online() {
             </div>
           </div>
         </div>
-        <OnlineCard items={products.plans} />
-        <OnlineCard items={products.bestsellers} />
-        <OnlineCard items={products.thisweekend} />
-        <OnlineCard items={products.organization} />
+        {isLoading ? (
+          <h1 className={style.loading}>Loading...</h1>
+        ) : (
+          <>
+            <OnlineCard items={products.plans} />
+            <OnlineCard items={products.bestsellers} />
+            <OnlineCard items={products.thisweekend} />
+            <OnlineCard items={products.organization} />
+          </>
+        )}
       </main>
       <Footer maxwidth="1600px" />
     </div>

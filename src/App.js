@@ -4,12 +4,14 @@ import Covid from "./routes/Covid";
 import Online from "./routes/Online";
 import Host from "./routes/Host";
 import Flex from "./routes/Flex";
+import ScrollToTop from "./Components/ScrollToTop";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./reset.css";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/covid" element={<Covid />} />
