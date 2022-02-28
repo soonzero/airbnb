@@ -22,6 +22,14 @@ export default function Header(props) {
     setIsVisible(active);
   }
 
+  React.useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isVisible]);
+
   function handleScroll() {
     if (scrollY > 50) {
       setScrollY(window.scrollY);
