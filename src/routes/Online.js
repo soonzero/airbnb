@@ -1,12 +1,14 @@
 import React from "react";
-import Header from "../Components/Header";
+import FixedHeader from "../Components/FixedHeader";
 import Footer from "../Components/Footer";
 import OnlineCard from "../Components/OnlineCard";
+import Loading from "../Components/Loading";
 import { ReactComponent as Leftbutton } from "../img/leftbutton.svg";
 import { ReactComponent as Rightbutton } from "../img/rightbutton.svg";
 import { ReactComponent as SlideLeftbutton } from "../img/slide_leftbutton.svg";
 import { ReactComponent as SlideRightbutton } from "../img/slide_rightbutton.svg";
 import style from "../Components/css/Online.module.css";
+import styled from "styled-components";
 
 export default function Online() {
   const [experiences, setExperiences] = React.useState([
@@ -467,7 +469,11 @@ export default function Online() {
 
   const experienceElements = experiences.map((e) => {
     return (
-      <div className={style.cardItem} style={{ backgroundImage: e.bgimage }}>
+      <div
+        key={e.id}
+        className={style.cardItem}
+        style={{ backgroundImage: e.bgimage }}
+      >
         <div className={style.itemDetail}>
           <span className={style.itemType}>{e.type}</span>
           <h3 className={style.itemTitle}>{e.title}</h3>
@@ -479,7 +485,7 @@ export default function Online() {
 
   const filterElements = filters.map((f) => {
     return (
-      <div className={style.filter}>
+      <div key={f} className={style.filter}>
         <button className={style.filterBtn}>{f}</button>
       </div>
     );
@@ -520,7 +526,7 @@ export default function Online() {
     container.scrollLeft -= 303;
   }
 
-  function goNext() {
+  function goNext(event) {
     const container = document.querySelector(`.${style.cardItems}`);
     container.scrollLeft += 303;
   }
@@ -561,7 +567,8 @@ export default function Online() {
 
   return (
     <div>
-      <Header fixed />
+      <FixedHeader fixed="false" />
+      <div className={style.headerMargin}></div>
       <main className={style.main}>
         <div className={style.recentlyAddedItems}>
           <div className={style.recentlyAddedHeader}>
@@ -615,7 +622,7 @@ export default function Online() {
           </div>
         </div>
         {isLoading ? (
-          <h1 className={style.loading}>Loading...</h1>
+          <Loading />
         ) : (
           <>
             <OnlineCard items={products.plans} />

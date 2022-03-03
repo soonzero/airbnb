@@ -1,21 +1,11 @@
 /* header & nav */
 
-.header {
-  width: 100vw;
-  background-color: black;
-  position: absolute;
-  z-index: 100;
-  top: 50px;
-  transition: background-color 150ms ease-in-out;
-}
-
 .fixedHeader {
   width: 100vw;
   background-color: white;
   position: fixed;
   top: 0;
   z-index: 1;
-  transition: background-color 150ms ease-in-out;
 }
 
 .fixedHeader::after {
@@ -27,21 +17,6 @@
   z-index: -1;
   position: fixed;
   top: 0;
-}
-
-.navContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 80px;
-  color: white;
-  background-color: black;
-  max-width: 1600px;
-  padding: 0 80px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-  transition: background-color 150ms ease-in-out;
 }
 
 .fixedNavContent {
@@ -173,6 +148,7 @@
   height: 243px;
   min-width: 240px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 16px;
+  z-index: 2;
   display: flex;
   flex-direction: column;
 }

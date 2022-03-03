@@ -7,12 +7,33 @@ import { ReactComponent as Global } from "../img/global.svg";
 import { ReactComponent as Menu } from "../img/menu.svg";
 import { ReactComponent as Account } from "../img/account.svg";
 import { Link } from "react-router-dom";
-import style from "./css/Header.module.css";
+import style from "./css/FixedHeader.module.css";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Header(props) {
-  const [scrollY, setScrollY] = React.useState(0);
-  const [fixed, setFixed] = React.useState(false);
+const StFixedHeader = styled.div`
+  width: 100vw;
+  background-color: white;
+  position: ${(props) => (props.nonfixed == "true" ? "relative" : "fixed")};
+  top: ${(props) => (props.nonfixed == "true" ? "unset" : "0")};
+  z-index: 3;
+
+  &::after {
+    box-shadow: ${(props) =>
+      props.nonfixed == "true"
+        ? "rgb(0 0 0 / 8%) 0px 1px 1px"
+        : "rgba(0, 0, 0, 0.08) 0px 1px 12px"};
+    content: "";
+    display: block;
+    height: 80px;
+    width: 100%;
+    z-index: -1;
+    position: ${(props) => (props.nonfixed == "true" ? "absolute" : "fixed")};
+    top: ${(props) => (props.nonfixed == "true" ? "0" : "0")};
+  }
+`;
+
+export default function FixedHeader(props) {
   const dropdownRef = React.useRef(null);
   const [menu, setMenu] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
@@ -28,30 +49,6 @@ export default function Header(props) {
       document.body.style.overflow = "unset";
     }
   }, [isVisible]);
-
-  function handleScroll() {
-    if (scrollY > 50) {
-      setScrollY(window.scrollY);
-      setFixed(true);
-    } else {
-      setScrollY(window.scrollY);
-      setFixed(false);
-    }
-  }
-
-  React.useEffect(() => {
-    if (props.fixed) {
-      setFixed(true);
-      return;
-    }
-    function scrollListener() {
-      window.addEventListener("scroll", handleScroll);
-    }
-    scrollListener();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrollY]);
 
   function handleMenu(event) {
     setMenu(!menu);
@@ -80,28 +77,16 @@ export default function Header(props) {
       window.removeEventListener("click", pageClickEvent);
     };
   }, [menu]);
-
   return (
     <>
-      <header className={fixed ? `${style.fixedHeader}` : `${style.header}`}>
-        <nav
-          className={fixed ? `${style.fixedNavContent}` : `${style.navContent}`}
-        >
-          <div
-            className={
-              fixed ? `${style.navLogo} ${style.fixed}` : `${style.navLogo}`
-            }
-          >
+      <StFixedHeader nonfixed={`${props.fixed == "false" ? "false" : "true"}`}>
+        <nav className={style.fixedNavContent}>
+          <div className={`${style.navLogo} ${style.fixed}`}>
             <Link to="/" style={{ textDecoration: "none" }}>
-              <Logo fill={fixed ? "#ff5a5f" : "white"} />
+              <Logo fill="#ff5a5f" />
             </Link>
           </div>
-          {props.fixed ? null : <SearchPanel fixed={fixed} />}
-          <div
-            className={
-              fixed ? `${style.navSide} ${style.fixed}` : `${style.navSide}`
-            }
-          >
+          <div className={`${style.navSide} ${style.fixed}`}>
             <div className={style.navHostGlobal}>
               <Link
                 to="/host"
@@ -154,11 +139,12 @@ export default function Header(props) {
             </div>
           </div>
         </nav>
-      </header>
+      </StFixedHeader>
       <div>
         {isVisible && <Blackout onSetIsVisible={onSetIsVisible} />}
         {isVisible && <Sign onSetIsVisible={onSetIsVisible} />}
       </div>
+      <div className={style.headerMargin}></div>
     </>
   );
 }

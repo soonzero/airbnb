@@ -39,18 +39,6 @@ function Home() {
     },
   ];
 
-  const cardElements = destination.map((e) => {
-    return (
-      <HomeCard
-        key={e.id}
-        location={e.location}
-        distance={e.distance}
-        cover={e.cover}
-        color={e.color}
-      />
-    );
-  });
-
   return (
     <div>
       <div className={style.bannerCovidSafety}>
@@ -68,7 +56,7 @@ function Home() {
             <br />
             여행지를 찾아드릴게요!
           </h1>
-          <Link to="/flex">
+          <Link to="/flex/farm">
             <span>유연한 검색</span>
           </Link>
         </div>
@@ -79,7 +67,19 @@ function Home() {
             설레는 다음 여행을 위한 아이디어
           </p>
         </div>
-        <div className={style.mainContentCards}>{cardElements}</div>
+        <div className={style.mainContentCards}>
+          {destination.map((e) => {
+            return (
+              <HomeCard
+                key={e.id}
+                location={e.location}
+                distance={e.distance}
+                cover={e.cover}
+                color={e.color}
+              />
+            );
+          })}
+        </div>
       </main>
       <main className={style.mainContent}>
         <div>

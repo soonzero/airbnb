@@ -15,7 +15,9 @@ export default function Footer(props) {
           <section className={style.sitemapContents}>
             <h5 className={style.sitemapTitle}>에어비앤비 지원</h5>
             <ul>
-              <li className={style.sitemapContent}>도움말 센터</li>
+              <li className={style.sitemapContent}>
+                <span>도움말 센터</span>
+              </li>
               <li className={style.sitemapContent}>안전 정보</li>
               <li className={style.sitemapContent}>예약 취소 옵션</li>
               <li className={style.sitemapContent}>

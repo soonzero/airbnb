@@ -33,10 +33,13 @@
   font-size: 14px;
   line-height: 1.2857142857;
   font-weight: 300;
+}
+
+.sitemapContent span {
   cursor: pointer;
 }
 
-.sitemapContent:hover {
+.sitemapContent span:hover {
   text-decoration: underline;
 }
 

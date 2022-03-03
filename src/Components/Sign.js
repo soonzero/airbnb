@@ -6,10 +6,10 @@ import { ReactComponent as Facebook } from "../img/facebook_login.svg";
 import { ReactComponent as Google } from "../img/google_login.svg";
 import { ReactComponent as Apple } from "../img/apple_login.svg";
 import { ReactComponent as Email } from "../img/email_login.svg";
-
+import { useDispatch, useSelector } from "react-redux";
 import style from "./css/Sign.module.css";
 
-const Container = styled.div`
+const StContainer = styled.div`
   max-width: 568px;
   max-height: 100%;
   background-color: white;
@@ -22,7 +22,7 @@ const Container = styled.div`
   border-radius: 12px;
 `;
 
-const CloseBtn = styled.button`
+const StCloseBtn = styled.button`
   position: fixed;
   top: 16px;
   left: 16px;
@@ -35,18 +35,43 @@ const CloseBtn = styled.button`
   }
 `;
 
+const StSocialLogin = styled.form`
+  margin-bottom: 16px;
+  width: 100%;
+`;
+
+const StSocialIcon = styled.div`
+  position: absolute;
+`;
+
+const StSocialService = styled.div`
+  font-size: 14px;
+  line-height: 1.7142857143;
+`;
+
 export default function Sign({ onSetIsVisible }) {
   const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [countryNumber, setCountryNumber] = React.useState("1");
+  const [countryNumber, setCountryNumber] = React.useState(1);
+  const [placeholder, setPlaceholder] = React.useState("(XXX) XXX-XXXX");
+  const [maxlength, setMaxlength] = React.useState(10);
 
   const onPhoneNumberHandler = (event) => {
     setPhoneNumber(event.target.value);
   };
 
   const countryNumberHandler = (event) => {
-    const country = event.target.value;
-    const number = country.replace(/\D/g, "");
+    const country = event.target;
+    const number = country.value.replace(/\D/g, "");
+    const index = country.options.selectedIndex;
+    const ph = country.options[index].getAttribute("ph");
+    const length = country.options[index].getAttribute("length");
     setCountryNumber(number);
+    setMaxlength(length);
+    if (ph) {
+      setPlaceholder(ph);
+    } else {
+      return setPlaceholder("");
+    }
   };
 
   React.useEffect(() => {
@@ -58,13 +83,28 @@ export default function Sign({ onSetIsVisible }) {
     onSetIsVisible(false);
   };
 
+  function checkAuth() {
+    if (
+      (countryNumber == 82 && phoneNumber == "01012345678") ||
+      (countryNumber == 49 && phoneNumber == "15733900671")
+    ) {
+      dispatch({ type: "LOGIN_SUCCESS" });
+      alert("logged in!");
+      onSetIsVisible(false);
+    } else {
+      alert("wrong phone number");
+    }
+  }
+
+  const dispatch = useDispatch();
+
   return (
-    <Container>
-      <CloseBtn onClick={handleClick}>
-        <Close />
-      </CloseBtn>
+    <StContainer>
+      <StCloseBtn onClick={handleClick}>
+        <Close type="button" />
+      </StCloseBtn>
       <div className={style.header}>
-        <h3>로그인 또는 회원 가입</h3>
+        <h3>로그인 또는 회원가입</h3>
       </div>
       <main className={style.main}>
         <div className={style.mainContainer}>
@@ -80,10 +120,17 @@ export default function Sign({ onSetIsVisible }) {
                     className={style.countrySelection}
                     id="country"
                     onChange={countryNumberHandler}
+                    defaultValue={countryNumber}
                   >
-                    <option value="미국 (+1)">미국 (+1)</option>
-                    <option value="독일 (+49)">독일 (+49)</option>
-                    <option value="한국 (+82)">한국 (+82)</option>
+                    <option ph="(XXX) XXX-XXXX" value="미국 (+1)" length="10">
+                      미국 (+1)
+                    </option>
+                    <option ph="XXX XXXX XXXX" value="독일 (+49)" length="11">
+                      독일 (+49)
+                    </option>
+                    <option value="한국 (+82)" length="11">
+                      한국 (+82)
+                    </option>
                   </select>
                 </label>
                 <div className={style.arrow}>
@@ -94,13 +141,16 @@ export default function Sign({ onSetIsVisible }) {
                 <label className={style.phoneNumberInput}>
                   <div className={style.inputTitle}>전화번호</div>
                   <div className={style.phoneNumberContainer}>
-                    <div className={style.countryNumber}>+{countryNumber}</div>
+                    <div className={style.countryNumber}>
+                      {countryNumber ? `+${countryNumber}` : null}
+                    </div>
                     <input
                       className={style.phoneNumber}
-                      placeholder="(XXX) XXX-XXXX"
+                      placeholder={placeholder}
                       type="tel"
                       onChange={onPhoneNumberHandler}
                       value={phoneNumber}
+                      maxLength={maxlength}
                     />
                   </div>
                 </label>
@@ -116,7 +166,9 @@ export default function Sign({ onSetIsVisible }) {
               </p>
             </div>
             <div className={style.continueBtn}>
-              <button>계속</button>
+              <button type="button" onClick={checkAuth}>
+                계속
+              </button>
             </div>
           </form>
         </div>
@@ -125,41 +177,41 @@ export default function Sign({ onSetIsVisible }) {
         </div>
         <div className={style.socialLoginContainer}>
           <div className={style.socialLogin}>
-            <form>
+            <StSocialLogin>
               <button>
-                <div className={style.icon}>
+                <StSocialIcon>
                   <Facebook />
-                </div>
-                <div>페이스북으로 로그인하기</div>
+                </StSocialIcon>
+                <StSocialService>페이스북으로 로그인하기</StSocialService>
               </button>
-            </form>
-            <form>
+            </StSocialLogin>
+            <StSocialLogin>
               <button>
-                <div className={style.icon}>
+                <StSocialIcon>
                   <Google />
-                </div>
-                <div>구글로 로그인하기</div>
+                </StSocialIcon>
+                <StSocialService>구글로 로그인하기</StSocialService>
               </button>
-            </form>
-            <form>
+            </StSocialLogin>
+            <StSocialLogin>
               <button>
-                <div className={style.icon}>
+                <StSocialIcon>
                   <Apple />
-                </div>
-                <div>Apple 계정으로 계속하기</div>
+                </StSocialIcon>
+                <StSocialService>Apple 계정으로 계속하기</StSocialService>
               </button>
-            </form>
-            <form>
+            </StSocialLogin>
+            <StSocialLogin>
               <button>
-                <div className={style.icon}>
+                <StSocialIcon>
                   <Email />
-                </div>
-                <div>이메일로 로그인하기</div>
+                </StSocialIcon>
+                <StSocialService>이메일로 로그인하기</StSocialService>
               </button>
-            </form>
+            </StSocialLogin>
           </div>
         </div>
       </main>
-    </Container>
+    </StContainer>
   );
 }

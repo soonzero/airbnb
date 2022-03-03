@@ -13,16 +13,6 @@
 
 /* filter */
 
-.filterContent {
-  margin: 0px auto;
-  max-width: 1600px;
-  height: 80px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .selection {
   display: flex;
   align-items: center;
@@ -38,7 +28,12 @@
   flex-direction: row;
   align-items: center;
   cursor: pointer;
-  background-color: transparent;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.filterBtn:hover {
+  background-color: #f7f7f7;
 }
 
 .filterBtn span {
