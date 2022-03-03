@@ -6,8 +6,15 @@
   scroll-behavior: smooth;
 }
 
+.mainSection {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
 .main {
-  margin: 16px auto 0px;
+  margin-top: 16px;
+  padding: 0 80px;
   max-width: 1600px;
 }
 

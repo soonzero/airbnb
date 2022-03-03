@@ -181,7 +181,7 @@ export default function FlexWood() {
       {isLoading ? (
         <Loading />
       ) : (
-        <>
+        <section className={style.mainSection}>
           <main className={style.main}>
             <FlexCard contents={contents} />
             <FlexCard contents={contents} />
@@ -208,7 +208,7 @@ export default function FlexWood() {
               </svg>
             </button>
           </div>
-        </>
+        </section>
       )}
       <Footer />
     </div>
