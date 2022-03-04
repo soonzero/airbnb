@@ -38,7 +38,7 @@ export default function OnlineCard(props) {
             <video src={`${c.video}`} autoPlay muted></video>
           ) : null}
           <button className={style.cardWish}>
-            <Wish />
+            <Wish fill="rgba(0, 0, 0, 0.5)" stroke="white" strokeWidth="2" />
           </button>
         </div>
         <div className={style.cardDetail}>

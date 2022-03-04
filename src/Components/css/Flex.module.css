@@ -6,16 +6,27 @@
   scroll-behavior: smooth;
 }
 
-.mainSection {
+.mainContainer {
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
+}
+
+.mainSection {
+  display: flex;
+  width: 100%;
+  padding: 0 80px;
+  box-sizing: border-box;
   margin: 0 auto;
+  margin-top: 16px;
 }
 
 .main {
-  margin-top: 16px;
-  padding: 0 80px;
+  margin: 0 auto;
   max-width: 1600px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* filter */
@@ -26,6 +37,7 @@
   flex-direction: row;
   margin-left: -10px;
   padding: 14px 0px;
+  flex-grow: 1;
 }
 
 .filterBtn {
@@ -50,12 +62,23 @@
 }
 
 .icon {
+  display: flex;
+  height: 20px;
+  margin-right: 0;
+  max-width: 0px;
+  opacity: 0;
+  transform: translateX(-12px) scale(0);
+}
+
+.iconSelected {
+  display: flex;
   margin-right: 8px;
-  display: inline-block;
+  max-width: 20px;
   height: 20px;
 }
 
 .icon img {
+  position: relative;
   width: 20px;
   height: 20px;
 }
@@ -127,4 +150,16 @@
 
 .mapBtn span {
   margin-right: 8px;
+}
+
+@media screen and (max-width: 1128px) {
+  .mainSection {
+    padding: 0 24px;
+  }
+}
+
+@media screen and (max-width: 743px) {
+  .map {
+    bottom: 96px;
+  }
 }

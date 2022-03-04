@@ -1,13 +1,19 @@
 /* footer */
 
 .footer {
+  width: 100vw;
   margin-top: 48px;
-  padding: 0 480px;
   background-color: #f7f7f7;
 }
 
 .footerMain {
+  padding: 0 80px;
   margin: 0 auto;
+}
+
+.footerWrapper {
+  margin: 0 auto;
+  max-width: 1600px;
 }
 
 .sitemap {

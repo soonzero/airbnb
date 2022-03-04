@@ -4,6 +4,7 @@ import FlexFilter from "../Components/FlexFilter";
 import Footer from "../Components/Footer";
 import FlexCard from "../Components/FlexCard";
 import Loading from "../Components/Loading";
+import FlexNav from "../Components/FlexNav";
 import style from "../Components/css/Flex.module.css";
 
 export default function FlexCastle() {
@@ -177,7 +178,7 @@ export default function FlexCastle() {
   return (
     <div className={style.container}>
       <FixedHeader nonfixed />
-      <FlexFilter />
+      <FlexFilter selected="castle" />
       {isLoading ? (
         <Loading />
       ) : (
@@ -210,6 +211,7 @@ export default function FlexCastle() {
           </div>
         </section>
       )}
+      <FlexNav />
       <Footer />
     </div>
   );

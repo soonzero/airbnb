@@ -32,6 +32,10 @@ const StFilter = styled.div`
   flex-direction: row;
   justify-content: space-between;
   z-index: 10;
+
+  @media screen and (max-width: 1128px) {
+    padding: 0 24px;
+  }
 `;
 
 const StSelectionContainer = styled.div`
@@ -44,7 +48,7 @@ const StBorderBottomContainer = styled.div`
   top: 0;
 `;
 
-export default function FlexFilter() {
+export default function FlexFilter(props) {
   const navigate = useNavigate();
 
   const [scrollY, setScrollY] = React.useState(0);
@@ -116,11 +120,15 @@ export default function FlexFilter() {
                   className={style.filterBtn}
                   onClick={() => navigate(`/flex/${filter.path}`)}
                 >
-                  {filter.icon ? (
-                    <div className={style.icon}>
-                      <img src={`${filter.icon}`}></img>
-                    </div>
-                  ) : null}
+                  <div
+                    className={
+                      filter.path == props.selected
+                        ? style.iconSelected
+                        : style.icon
+                    }
+                  >
+                    <img src={`${filter.icon}`}></img>
+                  </div>
                   <span>{filter.name}</span>
                 </button>
               );

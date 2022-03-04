@@ -4,6 +4,7 @@ import FlexFilter from "../Components/FlexFilter";
 import Footer from "../Components/Footer";
 import FlexCard from "../Components/FlexCard";
 import Loading from "../Components/Loading";
+import FlexNav from "../Components/FlexNav";
 import style from "../Components/css/Flex.module.css";
 
 export default function FlexBeach() {
@@ -177,7 +178,7 @@ export default function FlexBeach() {
   return (
     <div className={style.container}>
       <FixedHeader nonfixed />
-      <FlexFilter />
+      <FlexFilter selected="beach" />
       {isLoading ? (
         <Loading />
       ) : (
@@ -210,6 +211,7 @@ export default function FlexBeach() {
           </div>
         </section>
       )}
+      <FlexNav />
       <Footer />
     </div>
   );

@@ -3,6 +3,7 @@ import Blackout from "./Blackout";
 import Sign from "./Sign";
 import SearchPanel from "./SearchPanel";
 import { ReactComponent as Logo } from "../img/logowithtext.svg";
+import { ReactComponent as Log0 } from "../img/logo.svg";
 import { ReactComponent as Global } from "../img/global.svg";
 import { ReactComponent as Menu } from "../img/menu.svg";
 import { ReactComponent as Account } from "../img/account.svg";
@@ -18,6 +19,10 @@ const StFixedHeader = styled.div`
   top: ${(props) => (props.nonfixed == "true" ? "unset" : "0")};
   z-index: 3;
 
+  @media screen and (max-width: 744px) {
+    display: none;
+  }
+
   &::after {
     box-shadow: ${(props) =>
       props.nonfixed == "true"
@@ -30,6 +35,20 @@ const StFixedHeader = styled.div`
     z-index: -1;
     position: ${(props) => (props.nonfixed == "true" ? "absolute" : "fixed")};
     top: ${(props) => (props.nonfixed == "true" ? "0" : "0")};
+  }
+`;
+
+const StLogoWithText = styled.div`
+  display: block;
+  @media screen and (max-width: 1128px) {
+    display: none;
+  }
+`;
+
+const StLogoWithoutText = styled.div`
+  display: none;
+  @media screen and (max-width: 1128px) {
+    display: block;
   }
 `;
 
@@ -83,7 +102,12 @@ export default function FixedHeader(props) {
         <nav className={style.fixedNavContent}>
           <div className={`${style.navLogo} ${style.fixed}`}>
             <Link to="/" style={{ textDecoration: "none" }}>
-              <Logo fill="#ff5a5f" />
+              <StLogoWithoutText>
+                <Log0 fill="#ff5a5f" />
+              </StLogoWithoutText>
+              <StLogoWithText>
+                <Logo fill="#ff5a5f" />
+              </StLogoWithText>
             </Link>
           </div>
           <div className={`${style.navSide} ${style.fixed}`}>

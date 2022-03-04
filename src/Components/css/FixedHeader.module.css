@@ -176,3 +176,9 @@
 .hidden {
   display: none;
 }
+
+@media screen and (max-width: 1128px) {
+  .fixedNavContent {
+    padding: 0 40px;
+  }
+}

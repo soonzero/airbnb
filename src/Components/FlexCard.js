@@ -8,29 +8,34 @@ export default function FlexCard(props) {
   const Card = props.contents.map((content) => {
     return (
       <div key={content.id} className={style.card}>
-        <div
-          className={style.cover}
-          style={{ backgroundImage: `url(${content.cover[0]})` }}
-        >
-          <div className={style.wish}>
-            <Wish />
-          </div>
-          <div className={style.btns}>
-            <div className={style.prev}>
-              <Prev />
-            </div>
-            <div className={style.next}>
-              <Next />
+        <div className={style.cover}>
+          <div className={style.coverBase}>
+            <div
+              className={style.realCover}
+              style={{ backgroundImage: `url(${content.cover[0]})` }}
+            >
+              <div className={style.wish}>
+                <div></div>
+                <Wish
+                  fill="rgba(0, 0, 0, 0.5)"
+                  stroke="white"
+                  strokeWidth="2"
+                />
+              </div>
+              <div className={style.btns}>
+                <div className={style.prev}>
+                  <Prev />
+                </div>
+                <div className={style.next}>
+                  <Next />
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div className={style.detail}>
-          <div className={style.location}>
-            {content.location.length > 20
-              ? `${content.location.slice(0, 20)}...`
-              : content.location}
-          </div>
-          <div className={style.price}>{content.price} / 박</div>
+          <span className={style.location}>{content.location}</span>
+          <span className={style.price}>{content.price} / 박</span>
         </div>
         <div className={style.more}>
           <div className={style.distance}>{content.distance} 거리</div>
