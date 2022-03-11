@@ -4,6 +4,7 @@ import FlexFilter from "../Components/FlexFilter";
 import Footer from "../Components/Footer";
 import FlexCard from "../Components/FlexCard";
 import FlexNav from "../Components/FlexNav";
+import MobileHeader from "../Components/MobileHeader";
 import style from "../Components/css/Flex.module.css";
 import Loading from "../Components/Loading";
 
@@ -177,6 +178,7 @@ export default function FlexFarm() {
 
   return (
     <div className={style.container}>
+      <MobileHeader />
       <FixedHeader nonfixed />
       <FlexFilter selected="farm" />
       {isLoading ? (

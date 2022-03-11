@@ -118,3 +118,9 @@
 .social > li:last-child {
   margin-right: 0;
 }
+
+@media screen and (max-width: 1440px) {
+  .footer {
+    margin-top: 0;
+  }
+}

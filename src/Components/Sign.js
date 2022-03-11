@@ -50,6 +50,7 @@ const StSocialService = styled.div`
 `;
 
 export default function Sign({ onSetIsVisible }) {
+  const { Kakao } = window;
   const [phoneNumber, setPhoneNumber] = React.useState("");
   const [countryNumber, setCountryNumber] = React.useState(1);
   const [placeholder, setPlaceholder] = React.useState("(XXX) XXX-XXXX");
@@ -73,6 +74,22 @@ export default function Sign({ onSetIsVisible }) {
       return setPlaceholder("");
     }
   };
+
+  function loginWithKakao() {
+    if (!Kakao.isInitialized()) {
+      Kakao.init("cb6e15f3d0964c67b4f03ff5e97f50cc");
+    }
+    Kakao.Auth.login({
+      success: (res) => {
+        console.log("로그인 성공", res.scope);
+        dispatch({ type: "LOGIN_SUCCESS" });
+        onSetIsVisible(false);
+      },
+      fail: (error) => {
+        console.log(error);
+      },
+    });
+  }
 
   React.useEffect(() => {
     setPhoneNumber(phoneNumber);
@@ -178,15 +195,15 @@ export default function Sign({ onSetIsVisible }) {
         <div className={style.socialLoginContainer}>
           <div className={style.socialLogin}>
             <StSocialLogin>
-              <button>
+              <button type="button" onClick={loginWithKakao}>
                 <StSocialIcon>
                   <Facebook />
                 </StSocialIcon>
-                <StSocialService>페이스북으로 로그인하기</StSocialService>
+                <StSocialService>카카오 계정으로 로그인하기</StSocialService>
               </button>
             </StSocialLogin>
             <StSocialLogin>
-              <button>
+              <button type="button">
                 <StSocialIcon>
                   <Google />
                 </StSocialIcon>
@@ -194,7 +211,7 @@ export default function Sign({ onSetIsVisible }) {
               </button>
             </StSocialLogin>
             <StSocialLogin>
-              <button>
+              <button type="button">
                 <StSocialIcon>
                   <Apple />
                 </StSocialIcon>
@@ -202,7 +219,7 @@ export default function Sign({ onSetIsVisible }) {
               </button>
             </StSocialLogin>
             <StSocialLogin>
-              <button>
+              <button type="button">
                 <StSocialIcon>
                   <Email />
                 </StSocialIcon>

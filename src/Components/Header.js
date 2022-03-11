@@ -2,7 +2,9 @@ import React from "react";
 import Blackout from "./Blackout";
 import Sign from "./Sign";
 import SearchPanel from "./SearchPanel";
-import { ReactComponent as Logo } from "../img/logowithtext.svg";
+import GetUserProfile from "./GetUserProfile";
+import { ReactComponent as LogoWithText } from "../img/logowithtext.svg";
+import { ReactComponent as Logo } from "../img/logo.svg";
 import { ReactComponent as Global } from "../img/global.svg";
 import { ReactComponent as Menu } from "../img/menu.svg";
 import { ReactComponent as Account } from "../img/account.svg";
@@ -11,11 +13,27 @@ import style from "./css/Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Header(props) {
+  const { Kakao } = window;
   const [scrollY, setScrollY] = React.useState(0);
   const [fixed, setFixed] = React.useState(false);
   const dropdownRef = React.useRef(null);
   const [menu, setMenu] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  function handleResize() {
+    setWidth(window.innerWidth);
+  }
+
+  React.useEffect(() => {
+    function resizeListener() {
+      window.addEventListener("resize", handleResize);
+    }
+    resizeListener();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [width]);
 
   function onSetIsVisible(active) {
     setIsVisible(active);
@@ -40,10 +58,6 @@ export default function Header(props) {
   }
 
   React.useEffect(() => {
-    if (props.fixed) {
-      setFixed(true);
-      return;
-    }
     function scrollListener() {
       window.addEventListener("scroll", handleScroll);
     }
@@ -59,9 +73,21 @@ export default function Header(props) {
 
   const dispatch = useDispatch();
   const loginText = useSelector((state) => state.text);
+  const login = useSelector((state) => state.login);
 
   function logoutSite() {
-    dispatch({ type: "LOGOUT_SUCCESS" });
+    if (Kakao.Auth.getAccessToken()) {
+      console.log(
+        "카카오 인증 액세스 토큰이 존재합니다",
+        Kakao.Auth.getAccessToken()
+      );
+      Kakao.Auth.logout(() => {
+        console.log("로그아웃 완료", Kakao.Auth.getAccessToken());
+        dispatch({ type: "LOGOUT_SUCCESS" });
+      });
+    } else {
+      dispatch({ type: "LOGOUT_SUCCESS" });
+    }
   }
 
   React.useEffect(() => {
@@ -93,7 +119,11 @@ export default function Header(props) {
             }
           >
             <Link to="/" style={{ textDecoration: "none" }}>
-              <Logo fill={fixed ? "#ff5a5f" : "white"} />
+              {width > 1128 ? (
+                <LogoWithText fill={fixed ? "#ff5a5f" : "white"} />
+              ) : (
+                <Logo fill={fixed ? "#ff5a5f" : "white"} />
+              )}
             </Link>
           </div>
           {props.fixed ? null : <SearchPanel fixed={fixed} />}
@@ -120,7 +150,7 @@ export default function Header(props) {
                 <Menu />
               </div>
               <div className={style.account}>
-                <Account />
+                {login ? <GetUserProfile login={login} /> : <Account />}
                 <span className={style.accountUpdate}> </span>
               </div>
               {menu ? (

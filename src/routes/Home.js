@@ -49,16 +49,18 @@ function Home() {
         </Link>
         <Header />
       </div>
-      <section className={style.mainSearch}>
-        <div className={style.flexibleSearch}>
-          <h1>
-            에어비앤비가
-            <br />
-            여행지를 찾아드릴게요!
-          </h1>
-          <Link to="/flex/farm">
-            <span>유연한 검색</span>
-          </Link>
+      <section className={`${style.mainSearch}`}>
+        <div className={style.flexibleSearchContainer}>
+          <div className={style.flexibleSearch}>
+            <h1>
+              에어비앤비가
+              <br />
+              여행지를 찾아드릴게요!
+            </h1>
+            <Link to="/flex/farm">
+              <span>유연한 검색</span>
+            </Link>
+          </div>
         </div>
       </section>
       <main className={style.mainContent}>
@@ -86,46 +88,52 @@ function Home() {
           <p className={style.mainContentTitle}>에어비앤비 체험 둘러보기</p>
         </div>
         <div className={style.mainExperiences}>
-          <div
-            className={`${style.mainExperience} ${style.mainExperienceTraveling}`}
-          >
-            <h3 className={style.experience}>
-              여행 중 만나는
-              <br />
-              이색적인 즐길 거리
-            </h3>
-            <a href="https://www.airbnb.co.kr/s/experiences?location_search=NEARBY">
-              <span className={style.experienceButton}>체험</span>
-            </a>
+          <div className={style.mainExperienceContainer}>
+            <div
+              className={`${style.mainExperience} ${style.mainExperienceTraveling}`}
+            >
+              <h3 className={style.experience}>
+                여행 중 만나는
+                <br />
+                이색적인 즐길 거리
+              </h3>
+              <a href="https://www.airbnb.co.kr/s/experiences?location_search=NEARBY">
+                <span className={style.experienceButton}>체험</span>
+              </a>
+            </div>
           </div>
-          <div
-            className={`${style.mainExperience} ${style.mainExperienceAtHome}`}
-          >
-            <h3 className={style.experience}>
-              집에서 만나는
-              <br />
-              다양한 즐길 거리
-            </h3>
-            <Link to="/online" style={{ textDecoration: "none" }}>
-              <span className={style.experienceButton}>온라인 체험</span>
-            </Link>
+          <div className={style.mainExperienceContainer}>
+            <div
+              className={`${style.mainExperience} ${style.mainExperienceAtHome}`}
+            >
+              <h3 className={style.experience}>
+                집에서 만나는
+                <br />
+                다양한 즐길 거리
+              </h3>
+              <Link to="/online" style={{ textDecoration: "none" }}>
+                <span className={style.experienceButton}>온라인 체험</span>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
-      <main className={`${style.mainContent} ${style.askSuperHost}`}>
-        <h1 className={style.askHosting}>
-          호스팅에 관해
-          <br />
-          궁금하신 점이
-          <br />
-          있나요?
-        </h1>
-        <a href="#">
-          <span className={style.experienceButton}>
-            슈퍼호스트에게 물어보세요
-          </span>
-        </a>
-      </main>
+      <div className={style.askSuperHostContainer}>
+        <div className={style.askSuperHost}>
+          <h1 className={style.askHosting}>
+            호스팅에 관해
+            <br />
+            궁금하신 점이
+            <br />
+            있나요?
+          </h1>
+          <div>
+            <span className={style.experienceButton}>
+              슈퍼호스트에게 물어보세요
+            </span>
+          </div>
+        </div>
+      </div>
       <Footer maxwidth="1600px" border="none" />
     </div>
   );

@@ -3,6 +3,8 @@
   min-width: 348px;
   box-sizing: border-box;
   padding: 0 24px;
+  text-align: center;
+  flex: 0 1 auto;
 }
 
 .searchPanel {
@@ -17,8 +19,16 @@
   justify-content: center;
   height: 48px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
-  transition: box-shadow 0.2s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
+}
+
+.searchPanel.nonFixed {
+  transform-origin: 50% 0%;
+  margin: 0 auto;
+  transform: scale(2.85714, 1.375) translateY(58px);
+  opacity: 0;
+  visibility: hidden;
 }
 
 .searchPanel:hover {
@@ -46,12 +56,21 @@
   align-items: center;
   position: absolute;
   top: 0px;
-  max-width: 1600px;
+  justify-content: center;
   padding: 0 80px;
   width: 100%;
+  box-sizing: border-box;
   left: 0;
   text-align: center;
   z-index: 2;
+}
+
+.searchFormContainerWrapper {
+  width: 100%;
+}
+
+.formContainer {
+  padding-bottom: 16px;
 }
 
 .formWrapper {
@@ -108,11 +127,13 @@
 
 .tabPanelWrapper {
   height: 66px;
-  width: 850px;
+  width: 100%;
   background-color: white;
   border: 1px solid #dddddd;
   border-radius: 32px;
   box-sizing: border-box;
+  display: flex;
+  position: relative;
 }
 
 .tabPanel {
@@ -120,18 +141,19 @@
   height: 100%;
   line-height: 1.25;
   flex: 1 1 0%;
+  min-width: 0;
 }
 
 .divider {
   height: 32px;
   border-right: 1px solid #dddddd;
   align-self: center;
+  flex: 0 0 0;
 }
 
 .where {
-  position: relative;
-  display: flex;
-  flex-direction: row;
+  flex: 1.5 0 0%;
+  min-width: 0;
 }
 
 .cancelContainer {
@@ -263,7 +285,8 @@
 .checkWhen {
   display: flex;
   flex-direction: row;
-  flex: 1.5 0 0%;
+  flex: 2 0 0%;
+  min-width: 0;
 }
 
 .checkWhen span {
@@ -287,10 +310,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 15px 25px;
+  padding: 14px 24px;
   cursor: pointer;
-  flex: 1 1 0%;
-  z-index: 0;
+  flex: 1 0 0%;
+  z-index: 1;
   position: relative;
 }
 
@@ -312,52 +335,8 @@
   background-color: #ebebeb;
 }
 
-.guestsAndBtn {
-  flex: 0 0 25%;
-  position: relative;
-}
-
-.guestsAndButton {
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.guests {
-  cursor: pointer;
-  flex: 1 1 0%;
-  z-index: 1;
-  position: relative;
-}
-
-.guestsAndButton::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 32px;
-}
-
-.guestsAndButton:hover::after {
-  background-color: #ebebeb;
-}
-
-.guestsBtn {
-  padding: 14px 24px;
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.guestsBtn div {
+.checkIn label,
+.checkOut label {
   font-size: 12px;
   line-height: 1.3333333333;
   padding-bottom: 2px;
@@ -365,7 +344,83 @@
   letter-spacing: 0.04em;
 }
 
-.guestsBtn span {
+.checkIn input,
+.checkOut input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+.guestsAndBtn {
+  -webkit-box-align: center;
+  display: -webkit-box;
+  flex: 0.95 0 auto;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.guests {
+  padding: 1px;
+  cursor: pointer;
+  flex: 1 0 0%;
+  width: 100%;
+  z-index: 1;
+  overflow: visible;
+  appearance: none;
+  background: transparent;
+  display: block;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+  outline: none;
+}
+
+.guests::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 32px;
+  z-index: 0;
+  background-clip: padding-box;
+  box-sizing: border-box;
+}
+
+.guests:hover::after {
+  background-color: #ebebeb;
+}
+
+.guestsBtn {
+  padding: 14px 24px;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.guestsBtn div:first-child {
+  font-size: 12px;
+  line-height: 1.3333333333;
+  padding-bottom: 2px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.guestsBtn div:last-child {
   font-size: 14px;
   line-height: 1.2857142857;
   color: #717171;
@@ -373,16 +428,20 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
 }
 
 .panelSearchBtn {
-  display: flex;
   flex-direction: row;
   margin-left: -6px;
   padding-right: 8px;
   box-sizing: border-box;
   flex: 0 0 auto;
   z-index: 5;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .panelSearchBtn button {
@@ -391,6 +450,7 @@
   background-color: #ff385c;
   color: white;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .panelSearchBtn button:hover {
@@ -484,4 +544,39 @@
   text-align: start;
   margin-bottom: 16px;
   font-weight: 300;
+}
+
+@media screen and (max-width: 1128px) {
+  .stayBtn,
+  .experienceBtn,
+  .onlineExperienceBtn {
+    font-size: 14px;
+    line-height: 1.2857142857;
+    padding: 10px 12px;
+  }
+
+  .searchForm {
+    padding: 0 40px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .searchForm {
+    top: 64px;
+  }
+
+  .search {
+    text-align: unset;
+  }
+
+  .where {
+    flex: 1 0 0%;
+  }
+
+  .stayBtn,
+  .experienceBtn,
+  .onlineExperienceBtn {
+    font-size: 16px;
+    line-height: 1.25;
+  }
 }

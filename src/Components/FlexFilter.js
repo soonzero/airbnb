@@ -15,7 +15,7 @@ const StFilterContainer = styled.div`
     top: 0px;
     left: 0px;
     z-index: -1;
-    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
     opacity: ${(props) => (props.position > 80 ? "1" : "0")};
     transition: opacity 250ms ease-in-out;
   }
