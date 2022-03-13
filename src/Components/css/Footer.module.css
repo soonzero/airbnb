@@ -43,6 +43,7 @@
 
 .sitemapContent span {
   cursor: pointer;
+  word-break: keep-all;
 }
 
 .sitemapContent span:hover {
@@ -55,7 +56,26 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+}
+
+.extraInfo {
+  overflow: hidden;
+}
+
+.airbnbName {
+  font-size: 14px;
+  line-height: 1.2857142857;
+  color: #222222;
+  text-decoration: none;
+  margin: 0;
+  font-weight: 300;
+  margin-right: 19px;
+  display: inline-block;
+}
+
+.info {
+  margin-left: -19px;
+  display: inline-block;
 }
 
 .info span,
@@ -76,29 +96,40 @@
   margin: 0;
 }
 
-.settingAndSocial {
+.settingsAndSocial {
   display: flex;
   flex-direction: row;
+}
+
+.settings {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 .setting {
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.2857142857;
+  margin-right: 24px;
+  white-space: nowrap;
+}
+
+.globalIcon {
+  margin-right: 8px;
 }
 
 .language,
 .currency {
-  display: inline-block;
-  margin-right: 24px;
   font-size: 14px;
   text-decoration: underline;
-  cursor: pointer;
   font-weight: 500;
-}
-
-.language {
-  margin-left: 8px;
+  text-align: left;
 }
 
 .currencyIcon {
@@ -108,7 +139,7 @@
 .social {
   display: flex;
   flex-direction: row;
-  margin-left: 24px;
+  margin-left: 32px;
 }
 
 .social > li {
@@ -122,5 +153,77 @@
 @media screen and (max-width: 1440px) {
   .footer {
     margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 1128px) {
+  .footerMain {
+    padding: 0 40px;
+  }
+
+  .sitemap {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0;
+    margin: 0;
+  }
+
+  .sitemapContents {
+    padding: 0 0 24px 0;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .sitemapContents:last-child {
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+  }
+
+  .sitemapTitle {
+    margin-bottom: 0;
+  }
+
+  .sitemapContents ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+
+  .sitemapContent {
+    flex-basis: 33.3333%;
+    padding: 0 12px;
+    margin: 12px 0 0 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .sitemapContent span {
+    font-size: 14px;
+    line-height: 1.2857142857;
+  }
+
+  .extraInformation {
+    border-top: 1px solid #dddddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .settingsAndSocial {
+    margin-bottom: 16px;
+  }
+
+  .extraInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.25;
+  }
+
+  .airbnbName {
+    margin-right: 0;
   }
 }

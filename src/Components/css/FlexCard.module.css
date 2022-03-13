@@ -130,7 +130,7 @@
   }
 }
 
-@media screen and (max-width: 743px) {
+@media screen and (max-width: 744px) {
   .cards {
     grid-template-columns: 1fr;
   }

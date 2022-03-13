@@ -1,13 +1,72 @@
 import React from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import Banner from "../Components/Banner";
 import HomeCard from "../Components/HomeCard";
 import style from "../Components/css/Home.module.css";
+import { ReactComponent as LeftButton } from "../img/leftbutton.svg";
+import { ReactComponent as RightButton } from "../img/rightbutton.svg";
 import { Link } from "react-router-dom";
 import "../reset.css";
 
 function Home() {
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  const [prevDisabled, setPrevDisabled] = React.useState(true);
+  const [nextDisabled, setNextDisabled] = React.useState(false);
+
+  function handleScroll() {
+    const container = document.querySelector(`.${style.mainContentCards}`);
+    if (
+      container.scrollLeft > 0 &&
+      container.scrollLeft < 0.4407142857 * window.innerWidth
+    ) {
+      console.log(container.scrollLeft);
+      setPrevDisabled(false);
+      setNextDisabled(false);
+    } else if (container.scrollLeft > 0.4407142857 * window.innerWidth) {
+      console.log(container.scrollLeft);
+      setNextDisabled(true);
+    } else {
+      console.log(container.scrollLeft);
+      setPrevDisabled(true);
+    }
+  }
+
+  React.useEffect(() => {
+    const container = document.querySelector(`.${style.mainContentCards}`);
+    function scrollListener() {
+      container.addEventListener("scroll", handleScroll);
+    }
+    scrollListener();
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  function goPrev() {
+    const container = document.querySelector(`.${style.mainContentCards}`);
+    container.scrollLeft -= 200;
+  }
+
+  function goNext(event) {
+    const container = document.querySelector(`.${style.mainContentCards}`);
+    container.scrollLeft += 200;
+  }
+
+  function handleResize() {
+    setWidth(window.innerWidth);
+  }
+
+  React.useEffect(() => {
+    function resizeListener() {
+      window.addEventListener("resize", handleResize);
+    }
+    resizeListener();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [width]);
+
   const destination = [
     {
       id: 1,
@@ -64,10 +123,28 @@ function Home() {
         </div>
       </section>
       <main className={style.mainContent}>
-        <div>
+        <div className={style.mainContentContainer}>
           <p className={style.mainContentTitle}>
             설레는 다음 여행을 위한 아이디어
           </p>
+          {width > 950 ? null : (
+            <div className={style.scrollBtns}>
+              <button
+                className={style.scrollBtnPrev}
+                onClick={goPrev}
+                disabled={prevDisabled}
+              >
+                <LeftButton />
+              </button>
+              <button
+                className={style.scrollBtnNext}
+                onClick={goNext}
+                disabled={nextDisabled}
+              >
+                <RightButton />
+              </button>
+            </div>
+          )}
         </div>
         <div className={style.mainContentCards}>
           {destination.map((e) => {

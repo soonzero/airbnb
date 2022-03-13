@@ -7,7 +7,7 @@ import { ReactComponent as Login } from "../img/login_flex.svg";
 const StNavBarWrapper = styled.nav`
   display: none;
 
-  @media screen and (max-width: 743px) {
+  @media screen and (max-width: 744px) {
     display: flex;
     align-items: center;
     border-top: 1px solid #ebebeb;
@@ -59,7 +59,7 @@ const StIconDesc = styled.div`
   color: #222222;
 `;
 
-export default function FlexNav() {
+export default function BottomNavBar() {
   return (
     <StNavBarWrapper>
       <StNavBarContainer>

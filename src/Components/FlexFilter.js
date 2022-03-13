@@ -7,6 +7,7 @@ const StFilterContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 1;
+
   &::after {
     content: "";
     position: absolute;
@@ -19,6 +20,10 @@ const StFilterContainer = styled.div`
     opacity: ${(props) => (props.position > 80 ? "1" : "0")};
     transition: opacity 250ms ease-in-out;
   }
+
+  @media screen and (max-width: 744px) {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  }
 `;
 
 const StFilter = styled.div`
@@ -26,7 +31,7 @@ const StFilter = styled.div`
   margin: 8px auto 0px;
   padding: 0 80px;
   max-width: 1760px;
-  height: 80px;
+  height: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -35,6 +40,10 @@ const StFilter = styled.div`
 
   @media screen and (max-width: 1128px) {
     padding: 0 24px;
+  }
+
+  @media screen and (max-width: 744px) {
+    margin: 0;
   }
 `;
 
@@ -51,6 +60,7 @@ const StBorderBottomContainer = styled.div`
 export default function FlexFilter(props) {
   const navigate = useNavigate();
 
+  const [width, setWidth] = React.useState(window.innerWidth);
   const [scrollY, setScrollY] = React.useState(0);
   const [filters, setFilters] = React.useState([
     {
@@ -109,6 +119,20 @@ export default function FlexFilter(props) {
     };
   }, [scrollY]);
 
+  function handleResize() {
+    setWidth(window.innerWidth);
+  }
+
+  React.useEffect(() => {
+    function resizeListener() {
+      window.addEventListener("resize", handleResize);
+    }
+    resizeListener();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [width]);
+
   return (
     <StFilterContainer position={scrollY}>
       <StFilter>
@@ -135,72 +159,76 @@ export default function FlexFilter(props) {
             })}
           </StSelectionContainer>
         </div>
-        <div className={style.condition}>
-          <button>
-            <span className={style.textLeft}>언제든</span>
-            <svg
-              viewBox="0 0 32 32"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              role="presentation"
-              focusable="false"
-              style={{
-                display: "block",
-                fill: "none",
-                height: "12px",
-                width: "12px",
-                stroke: "currentcolor",
-                strokeWidth: "5.33333",
-                overflow: "visible",
-              }}
-            >
-              <g fill="none">
-                <path d="m28 12-11.2928932 11.2928932c-.3905243.3905243-1.0236893.3905243-1.4142136 0l-11.2928932-11.2928932"></path>
-              </g>
-            </svg>
-          </button>
-          <button>
-            <span className={style.textLeft}>인원</span>
-            <svg
-              viewBox="0 0 32 32"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              role="presentation"
-              focusable="false"
-              style={{
-                display: "block",
-                fill: "none",
-                height: "12px",
-                width: "12px",
-                stroke: "currentcolor",
-                strokeWidth: "5.33333",
-                overflow: "visible",
-              }}
-            >
-              <g fill="none">
-                <path d="m28 12-11.2928932 11.2928932c-.3905243.3905243-1.0236893.3905243-1.4142136 0l-11.2928932-11.2928932"></path>
-              </g>
-            </svg>
-          </button>
-          <button>
-            <svg
-              viewBox="0 0 16 16"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              role="presentation"
-              focusable="false"
-              style={{
-                display: "block",
-                height: "16px",
-                width: "16px",
-                fill: "currentcolor",
-              }}
-            >
-              <path d="M5 8c1.306 0 2.418.835 2.83 2H14v2H7.829A3.001 3.001 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.829 4H2V4h6.17A3.001 3.001 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
-            </svg>
-            <span className={style.textRight}>필터</span>
-          </button>
-        </div>
+        {width < 744 ? null : (
+          <div className={style.condition}>
+            <button>
+              <span className={style.textLeft}>언제든</span>
+              <svg
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="presentation"
+                focusable="false"
+                style={{
+                  display: "block",
+                  fill: "none",
+                  height: "12px",
+                  width: "12px",
+                  stroke: "currentcolor",
+                  strokeWidth: "5.33333",
+                  overflow: "visible",
+                }}
+              >
+                <g fill="none">
+                  <path d="m28 12-11.2928932 11.2928932c-.3905243.3905243-1.0236893.3905243-1.4142136 0l-11.2928932-11.2928932"></path>
+                </g>
+              </svg>
+            </button>
+            <button>
+              <span className={style.textLeft}>인원</span>
+              <svg
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="presentation"
+                focusable="false"
+                style={{
+                  display: "block",
+                  fill: "none",
+                  height: "12px",
+                  width: "12px",
+                  stroke: "currentcolor",
+                  strokeWidth: "5.33333",
+                  overflow: "visible",
+                }}
+              >
+                <g fill="none">
+                  <path d="m28 12-11.2928932 11.2928932c-.3905243.3905243-1.0236893.3905243-1.4142136 0l-11.2928932-11.2928932"></path>
+                </g>
+              </svg>
+            </button>
+            <button>
+              <svg
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="presentation"
+                focusable="false"
+                style={{
+                  display: "block",
+                  height: "16px",
+                  width: "16px",
+                  fill: "currentcolor",
+                }}
+              >
+                <path d="M5 8c1.306 0 2.418.835 2.83 2H14v2H7.829A3.001 3.001 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.829 4H2V4h6.17A3.001 3.001 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
+              </svg>
+              {width < 950 ? null : (
+                <span className={style.textRight}>필터</span>
+              )}
+            </button>
+          </div>
+        )}
       </StFilter>
     </StFilterContainer>
   );

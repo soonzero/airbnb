@@ -4,7 +4,8 @@ import FlexFilter from "../Components/FlexFilter";
 import Footer from "../Components/Footer";
 import FlexCard from "../Components/FlexCard";
 import Loading from "../Components/Loading";
-import FlexNav from "../Components/FlexNav";
+import MobileNavBar from "../Components/MobileNavBar";
+import BottomNavBar from "../Components/BottomNavBar";
 import style from "../Components/css/Flex.module.css";
 
 export default function FlexCastle() {
@@ -177,6 +178,7 @@ export default function FlexCastle() {
 
   return (
     <div className={style.container}>
+      <MobileNavBar />
       <FixedHeader nonfixed />
       <FlexFilter selected="castle" />
       {isLoading ? (
@@ -211,8 +213,8 @@ export default function FlexCastle() {
           </div>
         </section>
       )}
-      <FlexNav />
-      <Footer />
+      <BottomNavBar />
+      <Footer display="none" />
     </div>
   );
 }

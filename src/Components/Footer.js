@@ -8,7 +8,23 @@ import { ReactComponent as Blog } from "../img/naverblog.svg";
 import { ReactComponent as Post } from "../img/naverpost.svg";
 
 export default function Footer(props) {
-  return (
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  function handleResize() {
+    setWidth(window.innerWidth);
+  }
+
+  React.useEffect(() => {
+    function resizeListener() {
+      window.addEventListener("resize", handleResize);
+    }
+    resizeListener();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [width]);
+
+  return props.display == "none" && width < 744 ? null : (
     <footer className={style.footer}>
       <div className={style.footerMain} style={{ maxWidth: props.maxwidth }}>
         <div className={style.footerWrapper}>
@@ -95,46 +111,105 @@ export default function Footer(props) {
                 </ul>
               </section>
             </div>
-            <div className={style.extraInformation}>
-              <div className={style.info}>
-                <span>© 2022 Airbnb, Inc.</span>
-                <span className={style.dot}>·</span>
-                <a href="#">개인정보 처리방침</a>
-                <span className={style.dot}>·</span>
-                <a href="#">이용약관</a>
-                <span className={style.dot}>·</span>
-                <a href="#">사이트맵</a>
-                <span className={style.dot}>·</span>
-                <a href="#">한국의 변경된 환불 정책</a>
-                <span className={style.dot}>·</span>
-                <a href="#">회사 세부정보</a>
-              </div>
-              <div className={style.settingAndSocial}>
-                <div className={style.setting}>
-                  <Global />
-                  <span className={style.language}>한국어 (KR)</span>
-                  <span className={style.currencyIcon}>₩</span>
-                  <span className={style.currency}>KRW</span>
+            {width > 1128 ? (
+              <div className={style.extraInformation}>
+                <div className={style.extraInfo}>
+                  <div className={style.airbnbName}>© 2022 Airbnb, Inc.</div>
+                  <div className={style.info}>
+                    <span className={style.dot}>·</span>
+                    <a href="#">개인정보 처리방침</a>
+                    <span className={style.dot}>·</span>
+                    <a href="#">이용약관</a>
+                    <span className={style.dot}>·</span>
+                    <a href="#">사이트맵</a>
+                    <span className={style.dot}>·</span>
+                    <a href="#">한국의 변경된 환불 정책</a>
+                    <span className={style.dot}>·</span>
+                    <a href="#">회사 세부정보</a>
+                  </div>
                 </div>
-                <ul className={style.social}>
-                  <li>
-                    <Facebook />
-                  </li>
-                  <li>
-                    <Twitter />
-                  </li>
-                  <li>
-                    <Instagram />
-                  </li>
-                  <li>
-                    <Blog />
-                  </li>
-                  <li>
-                    <Post />
-                  </li>
-                </ul>
+                <div className={style.settingsAndSocial}>
+                  <div className={style.settings}>
+                    <button className={style.setting}>
+                      <span className={style.globalIcon}>
+                        <Global />
+                      </span>
+                      <span className={style.language}>한국어 (KR)</span>
+                    </button>
+                    <button className={style.setting}>
+                      <span className={style.currencyIcon}>₩</span>
+                      <span className={style.currency}>KRW</span>
+                    </button>
+                  </div>
+                  <ul className={style.social}>
+                    <li>
+                      <Facebook />
+                    </li>
+                    <li>
+                      <Twitter />
+                    </li>
+                    <li>
+                      <Instagram />
+                    </li>
+                    <li>
+                      <Blog />
+                    </li>
+                    <li>
+                      <Post />
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className={style.extraInformation}>
+                <div className={style.settingsAndSocial}>
+                  <div className={style.settings}>
+                    <button className={style.setting}>
+                      <span className={style.globalIcon}>
+                        <Global />
+                      </span>
+                      <span className={style.language}>한국어 (KR)</span>
+                    </button>
+                    <button className={style.setting}>
+                      <span className={style.currencyIcon}>₩</span>
+                      <span className={style.currency}>KRW</span>
+                    </button>
+                  </div>
+                  <ul className={style.social}>
+                    <li>
+                      <Facebook />
+                    </li>
+                    <li>
+                      <Twitter />
+                    </li>
+                    <li>
+                      <Instagram />
+                    </li>
+                    <li>
+                      <Blog />
+                    </li>
+                    <li>
+                      <Post />
+                    </li>
+                  </ul>
+                </div>
+                <div className={style.extraInfo}>
+                  <div className={style.airbnbName}>© 2022 Airbnb, Inc.</div>
+                  <div className={style.info}>
+                    <span className={style.dot}>·</span>
+                    <a href="#">개인정보 처리방침</a>
+                    <span className={style.dot}>·</span>
+                    <a href="#">이용약관</a>
+                    <span className={style.dot}>·</span>
+                    <a href="#">사이트맵</a>
+                    <span className={style.dot}>·</span>
+                    <a href="#">한국의 변경된 환불 정책</a>
+                    <span className={style.dot}>·</span>
+                    <a href="#">회사 세부정보</a>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

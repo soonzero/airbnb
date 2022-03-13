@@ -194,67 +194,92 @@ export default function SearchPanel({ fixed }) {
                 <div className={style.tabPanelWrapper}>
                   <div className={style.tabPanel}>
                     <div className={style.where}>
-                      <label htmlFor="toWhere" className={style.toWhere}>
-                        <span>위치</span>
-                        <input
-                          id="toWhere"
-                          placeholder="어디로 여행가세요?"
-                          onChange={handleDestination}
-                          value={destination}
-                          onClick={handleWhere}
-                        ></input>
-                      </label>
-                      <div className={style.cancelContainer}>
-                        {destination.length > 0 && where ? (
-                          <button
-                            type="button"
-                            onClick={cancelDestination}
-                            className={style.cancelBtn}
-                          >
-                            <Cancel />
-                          </button>
+                      <div className={style.whereContainer}>
+                        <label htmlFor="toWhere" className={style.toWhere}>
+                          <div>
+                            <div>위치</div>
+                            <input
+                              id="toWhere"
+                              placeholder="어디로 여행가세요?"
+                              onChange={handleDestination}
+                              value={destination}
+                              onClick={handleWhere}
+                            ></input>
+                          </div>
+                        </label>
+                        <div className={style.cancelContainer}>
+                          {destination.length > 0 && where ? (
+                            <button
+                              type="button"
+                              onClick={cancelDestination}
+                              className={style.cancelBtn}
+                            >
+                              <Cancel />
+                            </button>
+                          ) : null}
+                        </div>
+                        {where ? (
+                          <div className={style.flexibleSearchContainer}>
+                            <div
+                              ref={toWhereRef}
+                              className={style.flexibleSearch}
+                            >
+                              <span>언제 어디로든 떠나는 여행</span>
+                              <Link
+                                to="/flex/farm"
+                                style={{
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                              >
+                                <div>
+                                  유연한 검색
+                                  <video
+                                    preload="auto"
+                                    autoPlay
+                                    playsInline
+                                    poster="https://a0.muscache.com/pictures/04c0a34f-9880-48b7-a69c-49011f602a35.jpg"
+                                    src="https://a0.muscache.com/videos/vopt/13/e1/13e14ffc-822c-5e84-aa58-d6a6527dc218/13e14ffc822c5e84aa58d6a6527dc218.mp4?impolicy=low_quality"
+                                  />
+                                </div>
+                              </Link>
+                            </div>
+                          </div>
                         ) : null}
                       </div>
-                      {where ? (
-                        <div className={style.flexibleSearchContainer}>
-                          <div
-                            ref={toWhereRef}
-                            className={style.flexibleSearch}
-                          >
-                            <span>언제 어디로든 떠나는 여행</span>
-                            <Link
-                              to="/flex/farm"
-                              style={{
-                                textDecoration: "none",
-                                color: "black",
-                              }}
-                            >
-                              <div>
-                                유연한 검색
-                                <video
-                                  preload="auto"
-                                  autoPlay
-                                  playsInline
-                                  poster="https://a0.muscache.com/pictures/04c0a34f-9880-48b7-a69c-49011f602a35.jpg"
-                                  src="https://a0.muscache.com/videos/vopt/13/e1/13e14ffc-822c-5e84-aa58-d6a6527dc218/13e14ffc822c5e84aa58d6a6527dc218.mp4?impolicy=low_quality"
-                                />
-                              </div>
-                            </Link>
-                          </div>
-                        </div>
-                      ) : null}
                     </div>
                     <div className={style.divider}></div>
                     <div className={style.checkWhen}>
-                      <button type="button" className={style.checkIn}>
-                        <label htmlFor="checkIn">체크인</label>
-                        <input id="checkIn" type="date" />
-                      </button>
+                      <div className={style.checkInWrapper}>
+                        <div className={style.checkIn}>
+                          <div type="button" className={style.checkInContainer}>
+                            <div className={style.checkInDesc}>체크인</div>
+                            <input
+                              type="date"
+                              className={style.checkInInput}
+                              placeholder="날짜 입력"
+                              required
+                            ></input>
+                          </div>
+                        </div>
+                      </div>
                       <div className={style.divider}></div>
-                      <button type="button" className={style.checkOut}>
-                        <label htmlFor="checkOut">체크아웃</label>
-                        <input id="checkOut" type="date" />
-                      </button>
+                      <div className={style.checkOutWrapper}>
+                        <div className={style.checkOut}>
+                          <div
+                            type="button"
+                            className={style.checkOutContainer}
+                          >
+                            <div className={style.checkInDesc}>체크아웃</div>
+                            <input
+                              type="date"
+                              className={style.checkOutInput}
+                              placeholder="날짜 입력"
+                              required
+                            ></input>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div className={style.divider}></div>
                     <div className={style.guestsAndBtn}>

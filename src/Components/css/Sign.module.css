@@ -34,23 +34,20 @@ select {
   margin-bottom: 8px;
 }
 
-.input {
+.country,
+.userID {
   display: flex;
   position: relative;
   border: 1px solid #b0b0b0;
 }
 
-.input:first-child {
+.country {
+  border-bottom: none;
   border-radius: 8px 8px 0 0;
 }
 
-.input:last-child {
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-}
-
 .countryInput,
-.phoneNumberInput {
+.userIDInput {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -94,11 +91,12 @@ select {
   align-items: center;
 }
 
-.phoneNumberContainer {
+.userIDContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 100%;
+  width: 100%;
 }
 
 .countryNumber {
@@ -109,10 +107,11 @@ select {
   line-height: 1.25;
 }
 
-.phoneNumber {
+.username {
   border: none;
   outline: none;
   height: 100%;
+  width: 100%;
   box-sizing: border-box;
   background-color: transparent;
   font-size: 16px;
@@ -120,7 +119,7 @@ select {
   padding: 26px 12px 12px 10px;
 }
 
-.phoneNumber::placeholder {
+.username::placeholder {
   color: #717171;
 }
 
@@ -135,7 +134,7 @@ select {
 }
 
 .continueBtn {
-  margin-bottom: 24px;
+  margin: 16px 0 24px 0;
 }
 
 .continueBtn button {

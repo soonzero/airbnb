@@ -5,7 +5,7 @@ import { ReactComponent as Filter } from "../img/filter.svg";
 const StHeader = styled.header`
   display: none;
 
-  @media screen and (max-width: 743px) {
+  @media screen and (max-width: 744px) {
     display: -webkit-box;
     width: 100vw;
   }
@@ -104,7 +104,7 @@ const StDetailFilterBtn = styled.button`
     width: 100%;
     background-color: transparent;
   `;
-export default function MobileHeader() {
+export default function MobileNavBar() {
   return (
     <StHeader>
       <StHeaderWrapper>

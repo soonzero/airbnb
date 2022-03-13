@@ -74,17 +74,20 @@ export default function Header(props) {
   const dispatch = useDispatch();
   const loginText = useSelector((state) => state.text);
   const login = useSelector((state) => state.login);
+  const way = useSelector((state) => state.way);
 
   function logoutSite() {
-    if (Kakao.Auth.getAccessToken()) {
-      console.log(
-        "카카오 인증 액세스 토큰이 존재합니다",
-        Kakao.Auth.getAccessToken()
-      );
-      Kakao.Auth.logout(() => {
-        console.log("로그아웃 완료", Kakao.Auth.getAccessToken());
-        dispatch({ type: "LOGOUT_SUCCESS" });
-      });
+    if (way == "kakao") {
+      if (Kakao.Auth.getAccessToken()) {
+        console.log(
+          "카카오 인증 액세스 토큰이 존재합니다",
+          Kakao.Auth.getAccessToken()
+        );
+        Kakao.Auth.logout(() => {
+          console.log("로그아웃 완료", Kakao.Auth.getAccessToken());
+          dispatch({ type: "LOGOUT_SUCCESS" });
+        });
+      }
     } else {
       dispatch({ type: "LOGOUT_SUCCESS" });
     }
@@ -150,7 +153,11 @@ export default function Header(props) {
                 <Menu />
               </div>
               <div className={style.account}>
-                {login ? <GetUserProfile login={login} /> : <Account />}
+                {login && way == "kakao" ? (
+                  <GetUserProfile login={login} />
+                ) : (
+                  <Account />
+                )}
                 <span className={style.accountUpdate}> </span>
               </div>
               {menu ? (
