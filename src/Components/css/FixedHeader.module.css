@@ -124,6 +124,12 @@
   position: relative;
 }
 
+.account img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
 .accountUpdate {
   width: 10px;
   height: 10px;

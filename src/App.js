@@ -10,34 +10,13 @@ import FlexBeach from "./pages/FlexBeach";
 import FlexSmall from "./pages/FlexSmall";
 import FlexCastle from "./pages/FlexCastle";
 import ScrollToTop from "./Components/ScrollToTop";
+import rootReducer from "./reducers";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./reset.css";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 
-function reducer(currentState, action) {
-  if (currentState === undefined) {
-    return {
-      login: false,
-      text: "로그인",
-      way: "",
-    };
-  }
-
-  const newState = { ...currentState };
-  if (action.type === "LOGIN_SUCCESS") {
-    newState.login = true;
-    newState.text = "로그아웃";
-    newState.way = action.data;
-  } else if (action.type === "LOGOUT_SUCCESS") {
-    newState.login = false;
-    newState.text = "로그인";
-    newState.way = undefined;
-  }
-  return newState;
-}
-
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 function App() {
   return (

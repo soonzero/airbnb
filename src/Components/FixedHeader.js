@@ -1,7 +1,7 @@
 import React from "react";
 import Blackout from "./Blackout";
 import Sign from "./Sign";
-import SearchPanel from "./SearchPanel";
+import GetUserProfile from "./GetUserProfile";
 import { ReactComponent as Logo } from "../img/logowithtext.svg";
 import { ReactComponent as Log0 } from "../img/logo.svg";
 import { ReactComponent as Global } from "../img/global.svg";
@@ -74,7 +74,9 @@ export default function FixedHeader(props) {
   }
 
   const dispatch = useDispatch();
-  const loginText = useSelector((state) => state.text);
+  const loginText = useSelector((state) => state.loginReducer.text);
+  const login = useSelector((state) => state.loginReducer.login);
+  const way = useSelector((state) => state.loginReducer.way);
 
   function logoutSite() {
     dispatch({ type: "LOGOUT_SUCCESS" });
@@ -129,7 +131,11 @@ export default function FixedHeader(props) {
                 <Menu />
               </div>
               <div className={style.account}>
-                <Account />
+                {login && way == "kakao" ? (
+                  <GetUserProfile login={login} />
+                ) : (
+                  <Account />
+                )}
                 <span className={style.accountUpdate}> </span>
               </div>
               {menu ? (

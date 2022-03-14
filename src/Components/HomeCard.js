@@ -105,6 +105,23 @@ const StMainContentCard = styled.div`
       padding-right: 40px;
     }
   }
+
+  @media screen and (max-width: 744px) {
+    &:nth-child(n) {
+      flex: 0 0 calc((100vw - 40px) / 1.66);
+      padding-left: 16px;
+    }
+
+    &:first-child {
+      flex: 0 0 calc((100vw - 40px) / 1.66 + 8px);
+      padding-left: 24px;
+    }
+
+    &:last-child {
+      flex: 0 0 calc((100vw - 40px) / 1.66 + 24px);
+      padding-right: 24px;
+    }
+  }
 `;
 
 export default function HomeCard(props) {

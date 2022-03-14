@@ -175,23 +175,25 @@ export default function Footer(props) {
                       <span className={style.currency}>KRW</span>
                     </button>
                   </div>
-                  <ul className={style.social}>
-                    <li>
-                      <Facebook />
-                    </li>
-                    <li>
-                      <Twitter />
-                    </li>
-                    <li>
-                      <Instagram />
-                    </li>
-                    <li>
-                      <Blog />
-                    </li>
-                    <li>
-                      <Post />
-                    </li>
-                  </ul>
+                  {width < 744 ? null : (
+                    <ul className={style.social}>
+                      <li>
+                        <Facebook />
+                      </li>
+                      <li>
+                        <Twitter />
+                      </li>
+                      <li>
+                        <Instagram />
+                      </li>
+                      <li>
+                        <Blog />
+                      </li>
+                      <li>
+                        <Post />
+                      </li>
+                    </ul>
+                  )}
                 </div>
                 <div className={style.extraInfo}>
                   <div className={style.airbnbName}>© 2022 Airbnb, Inc.</div>

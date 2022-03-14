@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ReactComponent as Magnifier } from "../img/magnifier.svg";
 import { ReactComponent as Wish } from "../img/wish.svg";
 import { ReactComponent as Login } from "../img/login_flex.svg";
+import { Link } from "react-router-dom";
 
 const StNavBarWrapper = styled.nav`
   display: none;
@@ -33,13 +34,11 @@ const StNavBarContainer = styled.div`
   max-width: 560px;
 `;
 
-const StLink = styled.a`
+const StLink = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: 1 1 0px;
-  max-width: 20%;
 `;
 
 const StIconContainer = styled.div`
@@ -63,30 +62,45 @@ export default function BottomNavBar() {
   return (
     <StNavBarWrapper>
       <StNavBarContainer>
-        <StLink>
-          <div>
-            <StIconContainer>
-              <Magnifier strokeWidth="4" stroke="#ff385c" />
-            </StIconContainer>
-          </div>
-          <StIconDesc>둘러보기</StIconDesc>
-        </StLink>
-        <StLink>
-          <div>
-            <StIconContainer>
-              <Wish fill="none" strokeWidth="2.66667" stroke="#b0b0b0" />
-            </StIconContainer>
-          </div>
-          <StIconDesc>위시리스트</StIconDesc>
-        </StLink>
-        <StLink>
-          <div>
-            <StIconContainer>
-              <Login fill="#b0b0b0" />
-            </StIconContainer>
-          </div>
-          <StIconDesc>로그인</StIconDesc>
-        </StLink>
+        <Link
+          to="/"
+          style={{ maxWidth: "20%", textDecoration: "none", flex: "1 1 0px" }}
+        >
+          <StLink>
+            <div>
+              <StIconContainer>
+                <Magnifier strokeWidth="4" stroke="#ff385c" />
+              </StIconContainer>
+            </div>
+            <StIconDesc>둘러보기</StIconDesc>
+          </StLink>
+        </Link>
+        <Link
+          to="/"
+          style={{ maxWidth: "20%", textDecoration: "none", flex: "1 1 0px" }}
+        >
+          <StLink>
+            <div>
+              <StIconContainer>
+                <Wish fill="none" strokeWidth="2.66667" stroke="#b0b0b0" />
+              </StIconContainer>
+            </div>
+            <StIconDesc>위시리스트</StIconDesc>
+          </StLink>
+        </Link>
+        <Link
+          to="/"
+          style={{ maxWidth: "20%", textDecoration: "none", flex: "1 1 0px" }}
+        >
+          <StLink>
+            <div>
+              <StIconContainer>
+                <Login fill="#b0b0b0" />
+              </StIconContainer>
+            </div>
+            <StIconDesc>로그인</StIconDesc>
+          </StLink>
+        </Link>
       </StNavBarContainer>
     </StNavBarWrapper>
   );

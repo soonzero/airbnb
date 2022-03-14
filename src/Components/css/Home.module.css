@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   overflow: visible;
+  position: relative;
 }
 
 .bannerCovidSafety > a {
@@ -277,7 +278,9 @@
 .askHosting {
   font-size: 95px;
   line-height: 1.1052631579;
+  font-weight: 500;
   color: white;
+  letter-spacing: -0.02em;
 }
 
 /* Responsive */
@@ -297,6 +300,10 @@
 }
 
 @media screen and (max-width: 1440px) {
+  .flexibleSearch {
+    padding: 0 80px 64px;
+  }
+
   .flexibleSearch > h1 {
     font-size: 38px;
     line-height: 1.1315789474;
@@ -340,6 +347,15 @@
   .flexibleSearch > h1 {
     font-size: 32px;
     line-height: 1.125;
+  }
+
+  .flexibleSearch > a {
+    padding: 12px 24px;
+  }
+
+  .flexibleSearch > a > span {
+    font-size: 15px;
+    line-height: 1.6;
   }
 
   .mainContent {
@@ -396,5 +412,61 @@
 
   .mainSearch {
     padding-top: 244px;
+  }
+}
+
+@media screen and (max-width: 744px) {
+  .mainContent {
+    padding: 48px 24px 0 24px;
+  }
+
+  .mainContentTitle {
+    margin-bottom: 32px;
+  }
+
+  .mainContentCards {
+    margin: 0 -24px;
+    scroll-padding: 8px;
+  }
+
+  .mainSearch {
+    padding-top: 100px;
+    margin: 0;
+  }
+
+  .flexibleSearchContainer {
+    max-width: calc(100% - 48px);
+  }
+
+  .flexibleSearch > h1 {
+    font-size: 28px;
+    line-height: 1.1428571429;
+  }
+
+  .flexibleSearchContainer::before {
+    padding-top: 150%;
+  }
+
+  .mainExperiences {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-rows: auto;
+    row-gap: 16px;
+  }
+
+  .mainExperience {
+    padding: 32px;
+  }
+
+  .askSuperHost {
+    padding: 32px 24px;
+  }
+
+  .askSuperHostContainer::before {
+    padding-top: 133.333%;
+  }
+
+  .askHosting {
+    font-size: 43px;
+    line-height: 1.0930232558;
   }
 }

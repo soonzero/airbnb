@@ -5,8 +5,11 @@ import { ReactComponent as Cancel } from "../img/cancel.svg";
 import { ReactComponent as Minus } from "../img/minus_guests.svg";
 import { ReactComponent as Plus } from "../img/plus_guests.svg";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SearchPanel({ fixed }) {
+  const [checkIn, setCheckIn] = React.useState("");
+  const [checkOut, setCheckOut] = React.useState("");
   const [adults, setAdults] = React.useState(0);
   const [kids, setKids] = React.useState(0);
   const [infants, setInfants] = React.useState(0);
@@ -17,6 +20,45 @@ export default function SearchPanel({ fixed }) {
   const [where, setWhere] = React.useState(false);
   const guestsRef = React.useRef(null);
   const [showGuests, setShowGuests] = React.useState(false);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (
+      destination.length > 0 &&
+      checkIn &&
+      checkOut &&
+      totalGuests !== "게스트 추가"
+    ) {
+      dispatch({
+        type: "SET_SEARCH_CONDITION",
+        data: {
+          destination: destination,
+          checkIn: checkIn,
+          checkOut: checkOut,
+          guests: {
+            adults: adults,
+            kids: kids,
+            infants: infants,
+            animals: animals,
+          },
+        },
+      });
+    }
+  };
+
+  const handleCheckIn = (event) => {
+    setCheckIn(event.target.value);
+  };
+
+  const handleCheckOut = (event) => {
+    setCheckOut(event.target.value);
+  };
+
+  React.useEffect(() => {
+    setCheckIn(checkIn);
+    setCheckOut(checkOut);
+  }, [checkIn, checkOut]);
 
   function cancelDestination() {
     setDestination("");
@@ -163,7 +205,7 @@ export default function SearchPanel({ fixed }) {
         </div>
       </button>
       {fixed ? null : (
-        <form className={style.searchForm}>
+        <form className={style.searchForm} onSubmit={handleSubmit}>
           <div className={style.searchFormContainerWrapper}>
             <div className={style.formContainer}>
               <div className={style.formWrapper}>
@@ -204,6 +246,7 @@ export default function SearchPanel({ fixed }) {
                               onChange={handleDestination}
                               value={destination}
                               onClick={handleWhere}
+                              required
                             ></input>
                           </div>
                         </label>
@@ -257,6 +300,7 @@ export default function SearchPanel({ fixed }) {
                             <input
                               type="date"
                               className={style.checkInInput}
+                              onChange={handleCheckIn}
                               placeholder="날짜 입력"
                               required
                             ></input>
@@ -274,6 +318,7 @@ export default function SearchPanel({ fixed }) {
                             <input
                               type="date"
                               className={style.checkOutInput}
+                              onChange={handleCheckOut}
                               placeholder="날짜 입력"
                               required
                             ></input>

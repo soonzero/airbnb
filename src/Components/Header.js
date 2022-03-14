@@ -72,9 +72,9 @@ export default function Header(props) {
   }
 
   const dispatch = useDispatch();
-  const loginText = useSelector((state) => state.text);
-  const login = useSelector((state) => state.login);
-  const way = useSelector((state) => state.way);
+  const loginText = useSelector((state) => state.loginReducer.text);
+  const login = useSelector((state) => state.loginReducer.login);
+  const way = useSelector((state) => state.loginReducer.way);
 
   function logoutSite() {
     if (way == "kakao") {

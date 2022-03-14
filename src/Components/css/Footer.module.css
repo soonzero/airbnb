@@ -227,3 +227,36 @@
     margin-right: 0;
   }
 }
+
+@media screen and (max-width: 744px) {
+  .footerMain {
+    padding: 0 24px;
+  }
+
+  .sitemap {
+    padding: 32px 0;
+  }
+
+  .sitemapTitle {
+    margin-bottom: 0;
+  }
+
+  .sitemapContents ul {
+    display: block;
+    margin: 0;
+  }
+
+  .sitemapContent {
+    flex-basis: unset;
+    display: block;
+    padding: 0;
+  }
+
+  .extraInformation {
+    align-items: flex-start;
+  }
+
+  .extraInfo {
+    align-items: flex-start;
+  }
+}

@@ -2,32 +2,122 @@ import React from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import HomeCard from "../Components/HomeCard";
+import ToWhereModal from "../Components/ToWhereModal";
+import BottomNavBar from "../Components/BottomNavBar";
 import style from "../Components/css/Home.module.css";
+import styled from "styled-components";
 import { ReactComponent as LeftButton } from "../img/leftbutton.svg";
 import { ReactComponent as RightButton } from "../img/rightbutton.svg";
 import { Link } from "react-router-dom";
 import "../reset.css";
 
+const StToWhereButton = styled.div`
+  position: ${(props) => (props.fixed ? "fixed" : "absolute")};
+  left: 0px;
+  right: 0px;
+  top: ${(props) => (props.fixed ? 0 : "100%")};
+  z-index: 100;
+  padding: 24px 24px 16px;
+  max-width: 100vw;
+
+  &:before {
+    content: "";
+    display: block;
+    height: 80px;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 8%) 0px 1px 0px;
+    opacity: ${(props) => (props.fixed ? "unset" : 0)};
+    box-sizing: border-box;
+    transition: opacity 0.4s cubic-bezier(0.35, 0, 0.65, 1) 0s;
+  }
+
+  & > div {
+    background-color: ${(props) => (props.fixed ? "#F7F7F7" : "white")};
+    border: ${(props) =>
+      props.fixed ? "1px solid #f7f7f7" : "1px solid white"};
+    border-radius: 24px;
+    position: relative;
+    width: 100%;
+    height: 48px;
+    box-shadow: ${(props) =>
+      props.fixed ? "none" : "rgb(0 0 0 / 20%) 0px 6px 20px"};
+    box-sizing: border-box;
+
+    & > button {
+      cursor: pointer;
+      position: relative;
+      border-radius: 24px;
+      outline: none;
+      background-color: transparent;
+      border: none;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+
+      & > div {
+        display: flex;
+        font-size: 14px;
+        line-height: 1.2857142857;
+        color: #222222;
+        justify-content: center;
+        text-align: center;
+
+        & > div {
+          padding-right: 8px;
+          color: #ff385c;
+        }
+      }
+    }
+  }
+`;
+
 function Home() {
   const [width, setWidth] = React.useState(window.innerWidth);
-
+  const [modal, setModal] = React.useState(false);
   const [prevDisabled, setPrevDisabled] = React.useState(true);
   const [nextDisabled, setNextDisabled] = React.useState(false);
+  const [scrollY, setScrollY] = React.useState(0);
+  const [fixed, setFixed] = React.useState(false);
+
+  function handleScrollY() {
+    setScrollY(window.scrollY);
+    if (scrollY > 50) {
+      setFixed(true);
+    } else {
+      setFixed(false);
+    }
+  }
+
+  React.useEffect(() => {
+    function scrollListener() {
+      window.addEventListener("scroll", handleScrollY);
+    }
+    scrollListener();
+    return () => {
+      window.removeEventListener("scroll", handleScrollY);
+    };
+  }, [scrollY]);
 
   function handleScroll() {
     const container = document.querySelector(`.${style.mainContentCards}`);
-    if (
-      container.scrollLeft > 0 &&
-      container.scrollLeft < 0.4407142857 * window.innerWidth
-    ) {
-      console.log(container.scrollLeft);
+    const percent = () => {
+      if (width > 744) {
+        return 0.4407142857;
+      } else {
+        return 1.3;
+      }
+    };
+    if (container.scrollLeft > 0 && container.scrollLeft < percent() * width) {
       setPrevDisabled(false);
       setNextDisabled(false);
-    } else if (container.scrollLeft > 0.4407142857 * window.innerWidth) {
-      console.log(container.scrollLeft);
+    } else if (container.scrollLeft > percent() * width) {
       setNextDisabled(true);
     } else {
-      console.log(container.scrollLeft);
       setPrevDisabled(true);
     }
   }
@@ -45,12 +135,12 @@ function Home() {
 
   function goPrev() {
     const container = document.querySelector(`.${style.mainContentCards}`);
-    container.scrollLeft -= 200;
+    container.scrollLeft -= 300;
   }
 
   function goNext(event) {
     const container = document.querySelector(`.${style.mainContentCards}`);
-    container.scrollLeft += 200;
+    container.scrollLeft += 300;
   }
 
   function handleResize() {
@@ -100,22 +190,58 @@ function Home() {
 
   return (
     <div>
+      {modal ? <ToWhereModal modal={modal} setModal={setModal} /> : null}
       <div className={style.bannerCovidSafety}>
         <Link to="/covid">
           <span>
             에어비앤비의 코로나19 대응 방안에 대한 최신 정보를 확인하세요.
           </span>
         </Link>
-        <Header />
+        {width > 744 ? (
+          <Header />
+        ) : (
+          <StToWhereButton fixed={fixed}>
+            <div>
+              <button
+                type="button"
+                onClick={() => {
+                  setModal((prev) => !prev);
+                }}
+              >
+                <div>
+                  <div>
+                    <svg
+                      viewBox="0 0 32 32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="presentation"
+                      focusable="false"
+                      style={{
+                        display: "block",
+                        fill: "none",
+                        height: "16px",
+                        width: "16px",
+                        stroke: "currentcolor",
+                        strokeWidth: 4,
+                        overflow: "visible",
+                      }}
+                    >
+                      <g fill="none">
+                        <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path>
+                      </g>
+                    </svg>
+                  </div>
+                  어디로 여행가세요?
+                </div>
+              </button>
+            </div>
+          </StToWhereButton>
+        )}
       </div>
       <section className={`${style.mainSearch}`}>
         <div className={style.flexibleSearchContainer}>
           <div className={style.flexibleSearch}>
-            <h1>
-              에어비앤비가
-              <br />
-              여행지를 찾아드릴게요!
-            </h1>
+            <h1>에어비앤비가 여행지를 찾아드릴게요!</h1>
             <Link to="/flex/farm">
               <span>유연한 검색</span>
             </Link>
@@ -212,6 +338,7 @@ function Home() {
         </div>
       </div>
       <Footer maxwidth="1600px" border="none" />
+      <BottomNavBar />
     </div>
   );
 }
