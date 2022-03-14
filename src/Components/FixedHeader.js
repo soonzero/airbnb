@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import style from "./css/FixedHeader.module.css";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import SearchCondition from "./SearchCondition";
 
 const StFixedHeader = styled.div`
   width: 100vw;
@@ -112,6 +113,7 @@ export default function FixedHeader(props) {
               </StLogoWithText>
             </Link>
           </div>
+          {props.panel == "panel" && <SearchCondition />}
           <div className={`${style.navSide} ${style.fixed}`}>
             <div className={style.navHostGlobal}>
               <Link

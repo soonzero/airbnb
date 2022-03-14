@@ -4,6 +4,7 @@ import { ReactComponent as Magnifier } from "../img/magnifier.svg";
 import { ReactComponent as Wish } from "../img/wish.svg";
 import { ReactComponent as Login } from "../img/login_flex.svg";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const StNavBarWrapper = styled.nav`
   display: none;
@@ -59,6 +60,8 @@ const StIconDesc = styled.div`
 `;
 
 export default function BottomNavBar() {
+  const login = useSelector((state) => state.loginReducer.login);
+
   return (
     <StNavBarWrapper>
       <StNavBarContainer>
@@ -98,7 +101,7 @@ export default function BottomNavBar() {
                 <Login fill="#b0b0b0" />
               </StIconContainer>
             </div>
-            <StIconDesc>로그인</StIconDesc>
+            <StIconDesc>{login ? "프로필" : "로그인"}</StIconDesc>
           </StLink>
         </Link>
       </StNavBarContainer>

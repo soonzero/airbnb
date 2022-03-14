@@ -4,7 +4,7 @@ import { ReactComponent as Search } from "../img/search.svg";
 import { ReactComponent as Cancel } from "../img/cancel.svg";
 import { ReactComponent as Minus } from "../img/minus_guests.svg";
 import { ReactComponent as Plus } from "../img/plus_guests.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SearchPanel({ fixed }) {
@@ -21,6 +21,7 @@ export default function SearchPanel({ fixed }) {
   const guestsRef = React.useRef(null);
   const [showGuests, setShowGuests] = React.useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,6 +38,7 @@ export default function SearchPanel({ fixed }) {
           checkIn: checkIn,
           checkOut: checkOut,
           guests: {
+            total: adults + kids,
             adults: adults,
             kids: kids,
             infants: infants,
@@ -44,6 +46,7 @@ export default function SearchPanel({ fixed }) {
           },
         },
       });
+      navigate(`/search`);
     }
   };
 

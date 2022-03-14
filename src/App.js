@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./reset.css";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
+import Search from "./routes/Search";
 
 const store = createStore(rootReducer);
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/covid" element={<Covid />} />
           <Route path="/online" element={<Online />} />
           <Route path="/host" element={<Host />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/flex/farm" element={<FlexFarm />} />
           <Route path="/flex/pool" element={<FlexPool />} />
           <Route path="/flex/beach" element={<FlexBeach />} />

@@ -5,6 +5,7 @@ export default function search(currentState, action) {
       checkIn: "",
       checkOut: "",
       guests: {
+        total: undefined,
         adults: undefined,
         kids: undefined,
         infants: undefined,
@@ -18,6 +19,7 @@ export default function search(currentState, action) {
     newState.destination = action.data.destination;
     newState.checkIn = action.data.checkIn;
     newState.checkOut = action.data.checkOut;
+    newState.total = action.data.guests.total;
     newState.guests.adults = action.data.guests.adults;
     newState.guests.kids = action.data.guests.kids;
     newState.guests.infants = action.data.guests.infants;
@@ -26,6 +28,7 @@ export default function search(currentState, action) {
     newState.destination = "";
     newState.checkIn = "";
     newState.checkOut = "";
+    newState.total = undefined;
     newState.guests.adults = undefined;
     newState.guests.kids = undefined;
     newState.guests.infants = undefined;
