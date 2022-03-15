@@ -135,7 +135,7 @@ export default function OnlineCard(props) {
       </div>
       <div>
         {isVisible && <Blackout onSetIsVisible={onSetIsVisible} />}
-        {isVisible && <Sign onSetIsVisible={onSetIsVisible} />}
+        {isVisible && <Sign modal onSetIsVisible={onSetIsVisible} />}
       </div>
     </div>
   );

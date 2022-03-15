@@ -9,6 +9,7 @@ import { ReactComponent as Email } from "../img/email_login.svg";
 import { ReactComponent as Phone } from "../img/phone_login.svg";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./css/Sign.module.css";
+import { useNavigate } from "react-router-dom";
 
 const StContainer = styled.div`
   width: 568px;
@@ -82,6 +83,8 @@ export default function Sign(props) {
   const [countryNumber, setCountryNumber] = React.useState(1);
   const [placeholder, setPlaceholder] = React.useState("(XXX) XXX-XXXX");
   const [phoneLogin, setPhoneLogin] = React.useState(true);
+
+  const navigate = useNavigate();
 
   const onUsernameHandler = (event) => {
     setUsername(event.target.value);
