@@ -567,8 +567,7 @@ export default function Online() {
 
   return (
     <div>
-      <FixedHeader fixed="false" />
-      <div className={style.headerMargin}></div>
+      <FixedHeader fixed="false" height="80px" />
       <main className={style.main}>
         <div className={style.recentlyAddedItems}>
           <div className={style.recentlyAddedHeader}>

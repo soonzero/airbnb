@@ -75,6 +75,7 @@
   margin-bottom: 25px;
   font-weight: 500;
   line-height: 1.125;
+  word-break: keep-all;
 }
 
 .flexibleSearch > a {

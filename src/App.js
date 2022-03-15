@@ -16,6 +16,8 @@ import "./reset.css";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import Search from "./routes/Search";
+import Wishlists from "./routes/Wishlists";
+import Login from "./routes/Login";
 
 const store = createStore(rootReducer);
 
@@ -30,6 +32,8 @@ function App() {
           <Route path="/online" element={<Online />} />
           <Route path="/host" element={<Host />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/wishlists" element={<Wishlists />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/flex/farm" element={<FlexFarm />} />
           <Route path="/flex/pool" element={<FlexPool />} />
           <Route path="/flex/beach" element={<FlexBeach />} />

@@ -57,6 +57,7 @@
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 0 9px;
 }
 
 .wish {
@@ -66,9 +67,9 @@
   justify-content: space-between;
 }
 
-.prev,
-.next {
-  margin: 0 9px;
+.wish > div > button {
+  background: transparent;
+  cursor: pointer;
 }
 
 .detail {

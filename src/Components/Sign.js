@@ -16,27 +16,41 @@ const StContainer = styled.div`
   max-height: 100%;
   background-color: white;
   color: black;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1001;
+  z-index: ${(props) => (props.modal ? "1001" : "1")};
   border-radius: 12px;
+  position: relative;
+  box-sizing: border-box;
+  border: ${(props) => (props.modal ? null : "1px solid #b0b0b0")};
+
+  ${(props) =>
+    props.modal
+      ? `position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);`
+      : null};
+
+  & > main {
+    padding: ${(props) => (props.modal ? "24px" : "32px")};
+    box-sizing: border-box;
+  }
 `;
 
 const StUserID = styled.div`
   border: ${(props) => (props.valid ? "1px solid #b0b0b0" : "2px solid red")};
   border-radius: ${(props) => (props.phoneLogin ? `0 0 8px 8px` : `8px`)};
+  box-sizing: border-box;
 `;
 
 const StCloseBtn = styled.button`
-  position: fixed;
+  position: absolute;
   top: 16px;
   left: 16px;
   padding: 8px;
   background-color: transparent;
   border-radius: 50%;
   cursor: pointer;
+  box-sizing: border-box;
   &:hover {
     background-color: #ebebeb;
   }
@@ -45,18 +59,21 @@ const StCloseBtn = styled.button`
 const StSocialLogin = styled.form`
   margin-bottom: 16px;
   width: 100%;
+  box-sizing: border-box;
 `;
 
 const StSocialIcon = styled.div`
   position: absolute;
+  box-sizing: border-box;
 `;
 
 const StSocialService = styled.div`
   font-size: 14px;
   line-height: 1.7142857143;
+  box-sizing: border-box;
 `;
 
-export default function Sign({ onSetIsVisible }) {
+export default function Sign(props) {
   const { Kakao } = window;
   const [username, setUsername] = React.useState("");
   const emailReg =
@@ -108,7 +125,7 @@ export default function Sign({ onSetIsVisible }) {
       success: (res) => {
         console.log("로그인 성공", res.scope);
         dispatch({ type: "LOGIN_SUCCESS", data: "kakao" });
-        onSetIsVisible(false);
+        props.onSetIsVisible(false);
       },
       fail: (error) => {
         console.log(error);
@@ -122,7 +139,7 @@ export default function Sign({ onSetIsVisible }) {
   }, [countryNumber, username]);
 
   const handleClick = () => {
-    onSetIsVisible(false);
+    props.onSetIsVisible(false);
   };
 
   function checkAuth() {
@@ -133,7 +150,7 @@ export default function Sign({ onSetIsVisible }) {
       ) {
         dispatch({ type: "LOGIN_SUCCESS", data: "phoneNumber" });
         alert("logged in!");
-        onSetIsVisible(false);
+        props.onSetIsVisible(false);
       } else if (username.length == 0) {
         alert("please put your phone number below");
       } else {
@@ -145,7 +162,7 @@ export default function Sign({ onSetIsVisible }) {
       } else if (valid) {
         dispatch({ type: "LOGIN_SUCCESS", data: "email" });
         alert("logged in!");
-        onSetIsVisible(false);
+        props.onSetIsVisible(false);
       } else {
         alert("invalid email");
       }
@@ -155,14 +172,16 @@ export default function Sign({ onSetIsVisible }) {
   const dispatch = useDispatch();
 
   return (
-    <StContainer>
-      <StCloseBtn onClick={handleClick}>
-        <Close type="button" />
-      </StCloseBtn>
+    <StContainer modal={props.modal}>
+      {props.modal ? (
+        <StCloseBtn onClick={handleClick}>
+          <Close type="button" />
+        </StCloseBtn>
+      ) : null}
       <div className={style.header}>
         <h3>로그인 또는 회원가입</h3>
       </div>
-      <main className={style.main}>
+      <main>
         <div className={style.mainContainer}>
           <div className={style.welcome}>
             <h2>에어비앤비에 오신 것을 환영합니다.</h2>

@@ -11,15 +11,13 @@ select {
   align-items: center;
   min-height: 64px;
   border-bottom: 1px solid #ebebeb;
+  box-sizing: border-box;
 }
 
 .header h3 {
   font-size: 16px;
   margin: 0 16px;
-}
-
-.main {
-  padding: 24px;
+  box-sizing: border-box;
 }
 
 .welcome {
@@ -27,11 +25,13 @@ select {
   font-size: 22px;
   line-height: 1.1818181818;
   font-weight: 500;
+  box-sizing: border-box;
 }
 
 .inputs {
   border-radius: 8px;
   margin-bottom: 8px;
+  box-sizing: border-box;
 }
 
 .country,
@@ -39,11 +39,13 @@ select {
   display: flex;
   position: relative;
   border: 1px solid #b0b0b0;
+  box-sizing: border-box;
 }
 
 .country {
   border-bottom: none;
   border-radius: 8px 8px 0 0;
+  box-sizing: border-box;
 }
 
 .countryInput,
@@ -55,6 +57,7 @@ select {
   height: 56px;
   width: 100%;
   flex: 1 1 auto;
+  box-sizing: border-box;
 }
 
 .inputTitle {
@@ -68,6 +71,7 @@ select {
   color: #717171;
   transform-origin: 0% 0%;
   transform: translateY(-8px) scale(0.75);
+  box-sizing: border-box;
 }
 
 .countrySelection {
@@ -80,6 +84,7 @@ select {
   font-size: 16px;
   line-height: 1.25;
   background-color: transparent;
+  box-sizing: border-box;
 }
 
 .arrow {
@@ -89,6 +94,7 @@ select {
   right: 0px;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .userIDContainer {
@@ -97,6 +103,7 @@ select {
   align-items: center;
   height: 100%;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .countryNumber {
@@ -105,6 +112,7 @@ select {
   box-sizing: border-box;
   font-size: 16px;
   line-height: 1.25;
+  box-sizing: border-box;
 }
 
 .username {
@@ -117,24 +125,29 @@ select {
   font-size: 16px;
   line-height: 1.25;
   padding: 26px 12px 12px 10px;
+  box-sizing: border-box;
 }
 
 .username::placeholder {
   color: #717171;
+  box-sizing: border-box;
 }
 
 .confirmation {
   width: 100%;
   margin-bottom: 16px;
+  box-sizing: border-box;
 }
 
 .confirmation p {
   font-size: 12px;
   line-height: 1.3333333333;
+  box-sizing: border-box;
 }
 
 .continueBtn {
   margin: 16px 0 24px 0;
+  box-sizing: border-box;
 }
 
 .continueBtn button {
@@ -152,6 +165,7 @@ select {
     rgb(215, 4, 102) 100%
   );
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .divider {
@@ -160,6 +174,7 @@ select {
   flex-direction: row;
   justify-content: center;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .divider span {
@@ -167,6 +182,7 @@ select {
   line-height: 1.3333333333;
   color: #717171;
   padding: 0 16px;
+  box-sizing: border-box;
   position: relative;
 }
 
@@ -176,6 +192,7 @@ select {
   border-bottom: 1px solid #e4e4e4;
   top: 50%;
   right: 100%;
+  box-sizing: border-box;
   width: 568px;
 }
 
@@ -186,21 +203,25 @@ select {
   top: 50%;
   left: 100%;
   width: 568px;
+  box-sizing: border-box;
 }
 
 .socialLogin {
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .socialLogin form {
   margin-bottom: 16px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .socialLogin form:last-child {
   margin-bottom: 0;
+  box-sizing: border-box;
 }
 
 .socialLogin form button {
@@ -211,17 +232,21 @@ select {
   background-color: white;
   position: relative;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .socialLogin form button:hover {
   border-color: black;
+  box-sizing: border-box;
 }
 
 .icon {
   position: absolute;
+  box-sizing: border-box;
 }
 
 .socialLogin form button div {
   font-size: 14px;
   line-height: 1.7142857143;
+  box-sizing: border-box;
 }

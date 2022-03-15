@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ReactComponent as Previous } from "../img/previouspage.svg";
 import { ReactComponent as Filter } from "../img/filter.svg";
+import { useNavigate } from "react-router-dom";
 const StHeader = styled.header`
   display: none;
 
@@ -35,6 +36,7 @@ const StPreviousBtn = styled.div`
   flex-basis: 48px;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const StMainController = styled.div`
@@ -105,11 +107,12 @@ const StDetailFilterBtn = styled.button`
     background-color: transparent;
   `;
 export default function MobileNavBar() {
+  const navigate = useNavigate();
   return (
     <StHeader>
       <StHeaderWrapper>
         <StHeaderContainer>
-          <StPreviousBtn>
+          <StPreviousBtn onClick={() => navigate(`/`)}>
             <Previous />
           </StPreviousBtn>
           <StMainController>

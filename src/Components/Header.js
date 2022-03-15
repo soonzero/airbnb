@@ -8,7 +8,7 @@ import { ReactComponent as Logo } from "../img/logo.svg";
 import { ReactComponent as Global } from "../img/global.svg";
 import { ReactComponent as Menu } from "../img/menu.svg";
 import { ReactComponent as Account } from "../img/account.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./css/Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -72,7 +72,7 @@ export default function Header(props) {
   }
 
   const dispatch = useDispatch();
-  const loginText = useSelector((state) => state.loginReducer.text);
+  const navigate = useNavigate();
   const login = useSelector((state) => state.loginReducer.login);
   const way = useSelector((state) => state.loginReducer.way);
 
@@ -158,34 +158,56 @@ export default function Header(props) {
                 ) : (
                   <Account />
                 )}
-                <span className={style.accountUpdate}> </span>
+                {login ? null : <span className={style.accountUpdate}> </span>}
               </div>
               {menu ? (
                 <div ref={dropdownRef} className={style.profileMenu}>
-                  <div>
-                    <div
-                      className={style.menuList}
-                      onClick={() => onSetIsVisible(true)}
-                    >
-                      회원 가입
+                  {login ? (
+                    <div>
+                      <div className={style.menuList}>메시지</div>
+                      <div className={style.menuList}>여행</div>
+                      <div
+                        className={style.menuList}
+                        onClick={() => navigate(`/wishlists`)}
+                      >
+                        위시리스트
+                      </div>
+                      <div className={style.menuDivider}></div>
+                      <div
+                        className={style.menuList}
+                        onClick={() => navigate(`/host`)}
+                      >
+                        숙소 호스트 되기
+                      </div>
+                      <div className={style.menuList}>체험 호스팅하기</div>
+                      <div className={style.menuList}>호스트 추천하기</div>
+                      <div className={style.menuList}>계정</div>
+                      <div className={style.menuDivider}></div>
+                      <div className={style.menuList}>도움말</div>
+                      <div className={style.menuList} onClick={logoutSite}>
+                        로그아웃
+                      </div>
                     </div>
-                    <div
-                      className={style.menuList}
-                      onClick={
-                        loginText == "로그아웃"
-                          ? logoutSite
-                          : () => {
-                              onSetIsVisible(true);
-                            }
-                      }
-                    >
-                      {loginText}
+                  ) : (
+                    <div>
+                      <div
+                        className={style.menuList}
+                        onClick={() => onSetIsVisible(true)}
+                      >
+                        회원 가입
+                      </div>
+                      <div
+                        className={style.menuList}
+                        onClick={() => onSetIsVisible(true)}
+                      >
+                        로그인
+                      </div>
+                      <div className={style.menuDivider}></div>
+                      <div className={style.menuList}>숙소 호스트 되기</div>
+                      <div className={style.menuList}>체험 호스팅하기</div>
+                      <div className={style.menuList}>도움말</div>
                     </div>
-                    <div className={style.menuDivider}></div>
-                    <div className={style.menuList}>숙소 호스트 되기</div>
-                    <div className={style.menuList}>체험 호스팅하기</div>
-                    <div className={style.menuList}>도움말</div>
-                  </div>
+                  )}
                 </div>
               ) : null}
             </div>
@@ -194,7 +216,7 @@ export default function Header(props) {
       </header>
       <div>
         {isVisible && <Blackout onSetIsVisible={onSetIsVisible} />}
-        {isVisible && <Sign onSetIsVisible={onSetIsVisible} />}
+        {isVisible && <Sign modal onSetIsVisible={onSetIsVisible} />}
       </div>
     </>
   );

@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const StNavBarWrapper = styled.nav`
   display: none;
 
-  @media screen and (max-width: 744px) {
+  @media screen and (max-width: 743px) {
     display: flex;
     align-items: center;
     border-top: 1px solid #ebebeb;
@@ -59,7 +59,7 @@ const StIconDesc = styled.div`
   color: #222222;
 `;
 
-export default function BottomNavBar() {
+export default function BottomNavBar(props) {
   const login = useSelector((state) => state.loginReducer.login);
 
   return (
@@ -72,33 +72,40 @@ export default function BottomNavBar() {
           <StLink>
             <div>
               <StIconContainer>
-                <Magnifier strokeWidth="4" stroke="#ff385c" />
+                <Magnifier
+                  strokeWidth="4"
+                  stroke={props.now ? "#b0b0b0" : "#ff385c"}
+                />
               </StIconContainer>
             </div>
             <StIconDesc>둘러보기</StIconDesc>
           </StLink>
         </Link>
         <Link
-          to="/"
+          to="/wishlists"
           style={{ maxWidth: "20%", textDecoration: "none", flex: "1 1 0px" }}
         >
           <StLink>
             <div>
               <StIconContainer>
-                <Wish fill="none" strokeWidth="2.66667" stroke="#b0b0b0" />
+                <Wish
+                  fill="none"
+                  strokeWidth="2.66667"
+                  stroke={props.now == "wishlist" ? "#ff385c" : "#b0b0b0"}
+                />
               </StIconContainer>
             </div>
             <StIconDesc>위시리스트</StIconDesc>
           </StLink>
         </Link>
         <Link
-          to="/"
+          to={login ? `/` : `/login`}
           style={{ maxWidth: "20%", textDecoration: "none", flex: "1 1 0px" }}
         >
           <StLink>
             <div>
               <StIconContainer>
-                <Login fill="#b0b0b0" />
+                <Login fill={props.now == "login" ? "#ff385c" : "#b0b0b0"} />
               </StIconContainer>
             </div>
             <StIconDesc>{login ? "프로필" : "로그인"}</StIconDesc>

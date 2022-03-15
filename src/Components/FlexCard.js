@@ -3,6 +3,7 @@ import { ReactComponent as Wish } from "../img/wish.svg";
 import { ReactComponent as Prev } from "../img/flexcard_prev.svg";
 import { ReactComponent as Next } from "../img/flexcard_next.svg";
 import style from "../Components/css/FlexCard.module.css";
+import { useSelector } from "react-redux";
 
 export default function FlexCard(props) {
   const Card = props.contents.map((content) => {
@@ -16,11 +17,15 @@ export default function FlexCard(props) {
             >
               <div className={style.wish}>
                 <div></div>
-                <Wish
-                  fill="rgba(0, 0, 0, 0.5)"
-                  stroke="white"
-                  strokeWidth="2"
-                />
+                <div>
+                  <button type="button">
+                    <Wish
+                      fill="rgba(0, 0, 0, 0.5)"
+                      stroke="white"
+                      strokeWidth="2"
+                    />
+                  </button>
+                </div>
               </div>
               <div className={style.btns}>
                 <div className={style.prev}>

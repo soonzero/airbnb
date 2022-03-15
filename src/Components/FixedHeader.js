@@ -7,7 +7,7 @@ import { ReactComponent as Log0 } from "../img/logo.svg";
 import { ReactComponent as Global } from "../img/global.svg";
 import { ReactComponent as Menu } from "../img/menu.svg";
 import { ReactComponent as Account } from "../img/account.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./css/FixedHeader.module.css";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,8 +20,18 @@ const StFixedHeader = styled.div`
   top: ${(props) => (props.nonfixed == "true" ? "unset" : "0")};
   z-index: 3;
 
-  @media screen and (max-width: 744px) {
+  @media screen and (max-width: 743px) {
     display: none;
+  }
+
+  &::before {
+    content: "";
+    height: 140%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    position: absolute;
   }
 
   &::after {
@@ -36,6 +46,16 @@ const StFixedHeader = styled.div`
     z-index: -1;
     position: ${(props) => (props.nonfixed == "true" ? "absolute" : "fixed")};
     top: ${(props) => (props.nonfixed == "true" ? "0" : "0")};
+  }
+`;
+
+const StMargin = styled.div`
+  content: "";
+  width: 100%;
+  height: ${(props) => props.height};
+
+  @media screen and (max-width: 743px) {
+    display: none;
   }
 `;
 
@@ -57,9 +77,26 @@ export default function FixedHeader(props) {
   const dropdownRef = React.useRef(null);
   const [menu, setMenu] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
+  const [width, setWidth] = React.useState(window.innerWidth);
 
-  function onSetIsVisible(active) {
-    setIsVisible(active);
+  const navigate = useNavigate();
+
+  function handleResize() {
+    setWidth(window.innerWidth);
+  }
+
+  React.useEffect(() => {
+    function resizeListener() {
+      window.addEventListener("resize", handleResize);
+    }
+    resizeListener();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [width]);
+
+  function onSetIsVisible() {
+    setIsVisible((prev) => !prev);
   }
 
   React.useEffect(() => {
@@ -99,6 +136,7 @@ export default function FixedHeader(props) {
       window.removeEventListener("click", pageClickEvent);
     };
   }, [menu]);
+
   return (
     <>
       <StFixedHeader nonfixed={`${props.fixed == "false" ? "false" : "true"}`}>
@@ -138,34 +176,56 @@ export default function FixedHeader(props) {
                 ) : (
                   <Account />
                 )}
-                <span className={style.accountUpdate}> </span>
+                {login ? null : <span className={style.accountUpdate}> </span>}
               </div>
               {menu ? (
                 <div ref={dropdownRef} className={style.profileMenu}>
-                  <div>
-                    <div
-                      className={style.menuList}
-                      onClick={() => onSetIsVisible(true)}
-                    >
-                      회원 가입
+                  {login ? (
+                    <div>
+                      <div className={style.menuList}>메시지</div>
+                      <div className={style.menuList}>여행</div>
+                      <div
+                        className={style.menuList}
+                        onClick={() => navigate(`/wishlists`)}
+                      >
+                        위시리스트
+                      </div>
+                      <div className={style.menuDivider}></div>
+                      <div
+                        className={style.menuList}
+                        onClick={() => navigate(`/host`)}
+                      >
+                        숙소 호스트 되기
+                      </div>
+                      <div className={style.menuList}>체험 호스팅하기</div>
+                      <div className={style.menuList}>호스트 추천하기</div>
+                      <div className={style.menuList}>계정</div>
+                      <div className={style.menuDivider}></div>
+                      <div className={style.menuList}>도움말</div>
+                      <div className={style.menuList} onClick={logoutSite}>
+                        로그아웃
+                      </div>
                     </div>
-                    <div
-                      className={style.menuList}
-                      onClick={
-                        loginText == "로그아웃"
-                          ? logoutSite
-                          : () => {
-                              onSetIsVisible(true);
-                            }
-                      }
-                    >
-                      {loginText}
+                  ) : (
+                    <div>
+                      <div
+                        className={style.menuList}
+                        onClick={props.modal == "false" ? null : onSetIsVisible}
+                      >
+                        회원 가입
+                      </div>
+                      <div
+                        className={style.menuList}
+                        onClick={props.modal == "false" ? null : onSetIsVisible}
+                      >
+                        로그인
+                      </div>
+                      <div className={style.menuDivider}></div>
+                      <div className={style.menuList}>숙소 호스트 되기</div>
+                      <div className={style.menuList}>체험 호스팅하기</div>
+                      <div className={style.menuList}>도움말</div>
                     </div>
-                    <div className={style.menuDivider}></div>
-                    <div className={style.menuList}>숙소 호스트 되기</div>
-                    <div className={style.menuList}>체험 호스팅하기</div>
-                    <div className={style.menuList}>도움말</div>
-                  </div>
+                  )}
                 </div>
               ) : null}
             </div>
@@ -174,9 +234,9 @@ export default function FixedHeader(props) {
       </StFixedHeader>
       <div>
         {isVisible && <Blackout onSetIsVisible={onSetIsVisible} />}
-        {isVisible && <Sign onSetIsVisible={onSetIsVisible} />}
+        {isVisible && <Sign modal onSetIsVisible={onSetIsVisible} />}
       </div>
-      <div className={style.headerMargin}></div>
+      <StMargin height={props.height} />
     </>
   );
 }
